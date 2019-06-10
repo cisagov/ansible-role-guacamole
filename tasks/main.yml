@@ -1,2 +1,35 @@
 ---
-# tasks file for skeleton
+# tasks file for guacamole
+# docker pull guacamole/guacamole
+- name: Pull guacamole docker image
+  shell: docker pull guacamole/guacamole
+
+# docker pull guacamole/guacd
+- name: Pull guacamole docker image
+  shell: docker pull guacamole/guacd
+
+- name: Get postgres for guacd
+  shell: docker pull postgres
+
+ # Create the log directory
+- name: Create the /var/log/docker directory
+  file:
+    path: /var/log/docker
+    state: directory
+
+# Copy the systemd unit file
+- name: Copy the files for the guacamole docker build
+  copy:
+    src: "{{ item }}"
+    dest: "/var/log/docker/{{ item }}"
+    mode: 0644
+  loop:
+    - Dockerfile
+    - init.sh
+    - docker-compose.yaml
+
+- name: Get sql init script for postgres
+  shell: docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > /var/log/docker/initdb.sql
+
+- name: build postgres image to be used by guacamole
+  shell: docker build --tag guac-postgres /var/log/docker/
