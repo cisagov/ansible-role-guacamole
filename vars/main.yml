@@ -1,0 +1,5 @@
+---
+# vars file for guacamole
+
+# The Password postgres database for guacamole
+postgres_password: "{{ lookup('aws_ssm', '/guacamole/postgres_password') }}"
