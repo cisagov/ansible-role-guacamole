@@ -2,14 +2,21 @@
 # tasks file for guacamole
 # docker pull guacamole/guacamole
 - name: Pull guacamole docker image
-  shell: docker pull guacamole/guacamole
+  docker_image:
+    name: guacamole/guacamole
+    source: pull
 
 # docker pull guacamole/guacd
-- name: Pull guacamole docker image
-  shell: docker pull guacamole/guacd
+- name: Pull guacd docker image
+  docker_image:
+    name: guacamole/guacd
+    source: pull
 
-- name: Get postgres for guacd
-  shell: docker pull postgres
+# docker pull guacamole/guacd
+- name: Pull postgres docker image for guacd
+  docker_image:
+    name: guacamole/guacd
+    source: pull
 
 # Create the log directory
 - name: Create the /var/log/docker directory
@@ -29,7 +36,7 @@
     - docker-compose.yaml
 
 - name: Get sql init script for postgres
-  shell: |
+  docker: |
     docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh
     --postgres > /var/log/docker/initdb.sql
 
