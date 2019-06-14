@@ -29,7 +29,9 @@
     - docker-compose.yaml
 
 - name: Get sql init script for postgres
-  shell: docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > /var/log/docker/initdb.sql
+  shell: |
+    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh
+    --postgres > /var/log/docker/initdb.sql
 
 - name: build postgres image to be used by guacamole
   shell: docker build --tag guac-postgres /var/log/docker/
