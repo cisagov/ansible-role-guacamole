@@ -11,7 +11,7 @@
 - name: Get postgres for guacd
   shell: docker pull postgres
 
- # Create the log directory
+# Create the log directory
 - name: Create the /var/log/docker directory
   file:
     path: /var/log/docker
