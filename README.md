@@ -1,10 +1,11 @@
 # ansible-role-guacamole #
 
-[![Build Status](https://travis-ci.com/cisagov/skeleton-ansible-role.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-guacamole)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/skeleton-ansible-role.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
+[![Build Status](https://travis-ci.com/cisagov/ansible-role-guacamole.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-guacamole)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/context:python)
 
-An Ansible role for installing guacamole
+An Ansible role for installing [Apache
+Guacamole](https://guacamole.apache.org/).
 
 ## Requirements ##
 
@@ -50,4 +51,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-First Last - <kyle.evers@trio.dhs.gov>
+Kyle Evers - <kyle.evers@trio.dhs.gov>
