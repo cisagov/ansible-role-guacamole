@@ -18,8 +18,12 @@ None.
 
 ## Dependencies ##
 
-None.
-
+Docker is a dependency found here:
+```yaml
+dependencies:
+  - src: https://github.com/cisagov/ansible-role-docker
+    name: docker
+```
 ## Example Playbook ##
 
 Here's how to use it in a playbook:
