@@ -42,7 +42,7 @@
     - init.sh
     - docker-compose.yaml
 
-- name: register initdb.sql
+- name: Register initdb.sql
   stat:
     path: /var/log/docker/initdb.sql
   register: post_gres_init
