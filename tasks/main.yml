@@ -66,9 +66,12 @@
 # - name: build postgres image to be used by guacamole
 #   shell: docker build --tag guac-postgres /var/log/docker/
 
-- name: build the postgres image for quacamole
-  docker_image: >
-    name=postgres
-    tag=guac-postgres
-    path=/var/log/docker/
-    state=present
+- name: Build the postgres image for guacamole
+  docker_image:
+    name: postgres
+    tag: guac-postgres
+    build:
+      path: /var/log/docker/
+      pull: yes
+    source: build
+    state: present
