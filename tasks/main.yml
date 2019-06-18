@@ -42,14 +42,14 @@
     - init.sh
     - docker-compose.yaml
 
-- name: register initdb.sql
+- name: Register initdb.sql
   stat:
     path: /var/log/docker/initdb.sql
   register: post_gres_init
 
 - name: Get sql init script for postgres
-  shell: |
-    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh \
+  shell: >
+    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh
     --postgres > /var/log/docker/initdb.sql
   when: not post_gres_init.stat.exists
 
@@ -66,9 +66,12 @@
 # - name: build postgres image to be used by guacamole
 #   shell: docker build --tag guac-postgres /var/log/docker/
 
-- name: build the postgres image for quacamole
-  docker_image: >
-    name=postgres
-    tag=guac-postgres
-    path=/var/log/docker/
-    state=present
+- name: Build the postgres image for guacamole
+  docker_image:
+    name: postgres
+    tag: guac-postgres
+    build:
+      path: /var/log/docker/
+      pull: yes
+    source: build
+    state: present
