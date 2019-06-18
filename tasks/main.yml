@@ -48,8 +48,8 @@
   register: post_gres_init
 
 - name: Get sql init script for postgres
-  shell: |
-    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh \
+  shell: >
+    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh
     --postgres > /var/log/docker/initdb.sql
   when: not post_gres_init.stat.exists
 
