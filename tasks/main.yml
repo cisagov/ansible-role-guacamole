@@ -19,23 +19,22 @@
     name: guacamole/guacd
     source: pull
 
-# docker pull posgres for quacamole
+# docker pull posgres for guacamole
 - name: Pull postgres docker image for guacd
   docker_image:
     name: postgres
     source: pull
 
-# Create the log directory
-- name: Create the /var/log/docker directory
+# Create the temporary directory
+- name: Create a temporary directory
   file:
-    path: /var/log/docker
+    path: /tmp/postgres_docker
     state: directory
 
-# Copy the systemd unit file
 - name: Copy the files for the guacamole docker build
   copy:
     src: "{{ item }}"
-    dest: "/var/log/docker/{{ item }}"
+    dest: "/tmp/postgres_docker/{{ item }}"
     mode: 0644
   loop:
     - Dockerfile
@@ -44,34 +43,22 @@
 
 - name: Register initdb.sql
   stat:
-    path: /var/log/docker/initdb.sql
-  register: post_gres_init
+    path: /tmp/postgres_docker/initdb.sql
+  register: postgres_initdb
 
-- name: Get sql init script for postgres
-  shell: >
-    docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh
-    --postgres > /var/log/docker/initdb.sql
-  when: not post_gres_init.stat.exists
-
-
-# - name: Get sql init script for postgres
-#   docker_image:
-#     name: guacamole/guacamole
-#     image: guacamole/guacamole
-#     state: present
-#     command: |
-#       /opt/guacamole/bin/initdb.sh
-#       --postgres > /var/log/docker/initdb.sql
-
-# - name: build postgres image to be used by guacamole
-#   shell: docker build --tag guac-postgres /var/log/docker/
+- name: Create postgresql init script
+  shell: >-
+    docker run --rm guacamole/guacamole
+    /opt/guacamole/bin/initdb.sh --postgres >
+    /tmp/postgres_docker/initdb.sql
+  when: not postgres_initdb.stat.exists
 
 - name: Build the postgres image for guacamole
   docker_image:
     name: postgres
     tag: guac-postgres
     build:
-      path: /var/log/docker/
+      path: /tmp/postgres_docker
       pull: yes
     source: build
     state: present
