@@ -19,10 +19,10 @@
     name: guacamole/guacd
     source: pull
 
-# docker pull guacamole/guacd
+# docker pull posgres for quacamole
 - name: Pull postgres docker image for guacd
   docker_image:
-    name: guacamole/guacd
+    name: postgres
     source: pull
 
 # Create the log directory
@@ -66,9 +66,9 @@
 # - name: build postgres image to be used by guacamole
 #   shell: docker build --tag guac-postgres /var/log/docker/
 
-- name: build the image
+- name: build the postgres image for quacamole
   docker_image: >
-    name=guac-postgres
+    name=postgres
     tag=guac-postgres
     path=/var/log/docker/
     state=present
