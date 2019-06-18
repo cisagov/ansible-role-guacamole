@@ -1,11 +1,12 @@
 # ansible-role-guacamole #
 
-[![Build Status](https://travis-ci.com/cisagov/ansible-role-guacamole.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-guacamole)
+[![Build Status](https://travis-ci.com/cisagov/skeleton-ansible-role.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-guacamole)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/context:python)
 
-An Ansible role for installing [Apache
-Guacamole](https://guacamole.apache.org/).
+An Ansible role for installing guacamole
+
+NOTE: SSM passwords must be setup before deployment
 
 ## Requirements ##
 
