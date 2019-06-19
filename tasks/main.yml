@@ -19,7 +19,7 @@
     name: guacamole/guacd
     source: pull
 
-# docker pull posgres for guacamole
+# docker pull postgres for guacamole
 - name: Pull postgres docker image for guacd
   docker_image:
     name: postgres
