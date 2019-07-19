@@ -22,13 +22,13 @@
 # Create the directory for postgres docker
 - name: Create a directory
   file:
-    path: /var/postgres_docker
+    path: /var/guacamole
     state: directory
 
 - name: Copy the files for the guacamole docker build
   copy:
     src: "{{ item }}"
-    dest: "/var/postgres_docker/{{ item }}"
+    dest: "/var/guacamole/{{ item }}"
     mode: 0644
   loop:
     - Dockerfile
@@ -37,14 +37,14 @@
 
 - name: Register initdb.sql
   stat:
-    path: /var/postgres_docker/initdb.sql
+    path: /var/guacamole/initdb.sql
   register: postgres_initdb
 
 - name: Create postgresql init script
   shell: >-
     docker run --rm guacamole/guacamole
     /opt/guacamole/bin/initdb.sh --postgres >
-    /var/postgres_docker/initdb.sql
+    /var/guacamole/initdb.sql
   when: not postgres_initdb.stat.exists
 
 - name: Build the postgres image for guacamole
@@ -52,7 +52,7 @@
     name: postgres
     tag: guac-postgres
     build:
-      path: /var/postgres_docker
+      path: /var/guacamole
       pull: yes
     source: build
     state: present
