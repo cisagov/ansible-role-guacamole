@@ -1,12 +1,6 @@
 ---
 # tasks file for guacamole
 
-# docker_image requires the docker python module
-- name: Install the docker python module
-  pip:
-    name:
-      - docker[tls]
-
 # docker pull guacamole/guacamole
 - name: Pull guacamole docker image
   docker_image:

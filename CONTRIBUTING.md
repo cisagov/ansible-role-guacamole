@@ -8,14 +8,14 @@ of contribution, and don't want a wall of rules to get in the way of
 that.
 
 Before contributing, we encourage you to read our CONTRIBUTING policy
-(you are here), our [LICENSE](LICENSE.md), and our
-[README](README.md), all of which should be in this repository.
+(you are here), our [LICENSE](LICENSE), and our [README](README.md),
+all of which should be in this repository.
 
 ## Issues ##
 
 If you want to report a bug or request a new feature, the most direct
 method is to [create an
-issue](https://github.com/cisagov/skeleton-ansible-role/issues) in
+issue](https://github.com/cisagov/ansible-role-guacamole/issues) in
 this repository.  We recommend that you first search through existing
 issues (both open and closed) to check if your particular issue has
 already been reported.  If it has then you might want to add a comment
@@ -25,7 +25,7 @@ one.
 ## Pull requests ##
 
 If you choose to [submit a pull
-request](https://github.com/cisagov/skeleton-ansible-role/pulls), you
+request](https://github.com/cisagov/ansible-role-guacamole/pulls), you
 will notice that our continuous integration (CI) system runs a fairly
 extensive set of linters and syntax checkers.  Your pull request may
 fail these checks, and that's OK.  If you want you can stop there and
@@ -77,10 +77,10 @@ Once `pyenv` and `pyenv-virtualenv` are installed on your system, you
 can create and configure the Python virtual environment with these
 commands:
 
-```bash
-cd skeleton-ansible-role
-pyenv virtualenv <python_version_to_use> skeleton-ansible-role
-pyenv local skeleton-ansible-role
+```console
+cd ansible-role-guacamole
+pyenv virtualenv <python_version_to_use> ansible-role-guacamole
+pyenv local ansible-role-guacamole
 pip install -r requirements-dev.txt
 ```
 
@@ -88,7 +88,7 @@ pip install -r requirements-dev.txt
 
 Now setting up pre-commit is as simple as:
 
-```bash
+```console
 pre-commit install
 ```
 
