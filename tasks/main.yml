@@ -38,8 +38,8 @@
   when: guac_dir.stat.exists
   with_items:
     - {src: 'Dockerfile.j2', dest: '/var/guacamole/Dockerfile'}
-    - {src: 'init.sh.j2', dest: '/var/guacamole/init.sh'}
-    - {src: 'docker-compose.yaml.j2', dest:'/var/guacamole/docker-compose.yaml'}
+    - {src: 'init.j2', dest: '/var/guacamole/init.sh'}
+    - {src: 'docker-compose.j2', dest: '/var/guacamole/docker-compose.yaml'}
 
 - name: Register initdb.sql
   stat:
