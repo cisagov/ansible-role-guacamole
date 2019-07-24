@@ -30,16 +30,16 @@
     path: /var/guacamole/
   register: guac_dir
 
-- name: Copy the files for the guacamole docker build
-  copy:
-    src: "{{ item }}"
-    dest: "/var/guacamole/{{ item }}"
+- name: Copy the files for the guacamole docker buils
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     mode: 0644
   when: guac_dir.stat.exists
-  loop:
-    - Dockerfile
-    - init.sh
-    - docker-compose.yaml
+  with_items:
+    - {src: 'Dockerfile.j2', dest: '/var/guacamole/Dockerfile'}
+    - {src: 'init.sh.j2', dest: '/var/guacamole/init.sh'}
+    - {src: 'docker-compose.yaml.j2', dest:'/var/guacamole/docker-compose.yaml'}
 
 - name: Register initdb.sql
   stat:
