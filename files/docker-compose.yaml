@@ -10,7 +10,7 @@ services:
   postgres:
     image: guac-postgres
     environment:
-      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_PASSWORD: {{ postgres_password }}
     container_name: postgres
     volumes:
       - /tmp/init:/tmp

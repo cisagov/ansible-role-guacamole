@@ -1,6 +1,6 @@
 FROM postgres
 MAINTAINER Kyle Evers <Kyle.Evers@trio.dhs.gov>
-ENV POSTGRES_PASSWORD="{{ postgres_password }}"
+ENV POSTGRES_PASSWORD={{ postgres_password }}
 
 USER postgres
 

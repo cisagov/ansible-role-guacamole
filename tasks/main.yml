@@ -25,11 +25,17 @@
     path: /var/guacamole
     state: directory
 
+- name: Register /var/guacamole
+  stat:
+    path: /var/guacamole/
+  register: guac_dir
+
 - name: Copy the files for the guacamole docker build
   copy:
     src: "{{ item }}"
     dest: "/var/guacamole/{{ item }}"
     mode: 0644
+  when: guac_dir.stat.exists
   loop:
     - Dockerfile
     - init.sh
