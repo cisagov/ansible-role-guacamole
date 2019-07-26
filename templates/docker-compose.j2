@@ -8,9 +8,9 @@ services:
     container_name: guacd
 
   postgres:
-    image: guac-postgres
+    image: "postgres:guac-postgres"
     environment:
-      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_PASSWORD: {{ postgres_password }}
     container_name: postgres
     volumes:
       - /tmp/init:/tmp
@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_DATABASE: guacamole_db
       POSTGRES_USER: guacamole_user
-      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_PASSWORD: {{ postgres_password }}
       GUACD_HOSTNAME: guacd
       GUACD_PORT: 4822
       POSTGRES_HOSTNAME: postgres
