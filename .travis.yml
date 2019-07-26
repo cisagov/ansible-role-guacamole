@@ -5,6 +5,34 @@ python: 3.7
 # pre-commit hooks can use Docker, so we should go ahead and enable it
 services: docker
 
+env:
+  global:
+    # AWS_ACCESS_KEY_ID
+    - secure: "bQHYcWxh/hHUH8tfwXZxs341Dto3SVdcFEVkKcghygNfbrrzLEg2vlEGl87a\
+      2DPlr+wQlONjshx798L62CNtI7sQ1utpy1CxzGTeGsX09LTjoZUI6FGY+XFhYg+N+piG5\
+      tAvr54gXGYDVYegkuNt6fBMhgJLuL4lE0p9PWzmV9WRftPAuL8vsEs6cXXafMNZdDVlsA\
+      bhPga6KqRWtB4X4P6Rr6dU9aqFeXHMi+5z2+aN4k/JaXSjhbnp9pIB26G59uJwOnIh+3H\
+      D87SlIV+rJdIMedmr5pdK3ZzC8NSDH/+0wsip5oS/BUSEZ9DdK2oTzdzRHS/ihDgqVGH6\
+      zKZI8DKBx0LjWlZTAxgHnOrYDgJv5ncf7iMFA4gH2GzVwPhlTH+fc4vy9mSOgVp/154Mj\
+      D9lnT26aXGK/4SUVaCeSQbTdQNsjf8CcnpKT/MFjVG0UJc5xjTJAmAjcqdtMTZTf2aEqi\
+      xs91kIYYS2QicouwFV4PVMvgXZQkAVLvJbEhOyvDdPpJ6jMYHO8xpBl3IsDUHap9imm/Z\
+      CM7k8jpHeiApMtoipNsY8usoPLwi8/PSKaxec71OucMFG8nxkPtPZohHjclSdY4iZ9F+W\
+      UhVqGA4jhHMAaxZBLDh+f8ycSezmCxUaC7GnaPTx0f5dxsgoXD4mZMNgqv4sn/NvuCd9A\
+      EE="
+    - AWS_DEFAULT_REGION="us-east-1"
+    # AWS_SECRET_ACCESS_KEY
+    - secure: "QFX4LZyC1hyRuel0Yokglz+sW2jHmTfzwg26DBIx7mU9i2YLxJpUGuR2AyZT\
+      p2YAS9X0UaX0q3XD/gsE/YYSnJXlAGKQJ82J8njLXHM/CfYCX17vVNwdtt/o3JadxnP/R\
+      N1dUaepyelypSiiPxVM17qUmtbE2oEsmNW84bVeVAU2+Jiv4i+2/vqKPf+SbPHhVkXa2e\
+      pFLZ8IlR1IbkDtJf6EEVVC+v38TDbSMJ5JnlxsWOLdhk4ie4nOs7M+pRHv3AmcJyg3Kqn\
+      ABc6l46s6kMBIgUaBpRoF6q0aCMvZEV+1pTvpob+YrvVirCqbOmfJ3oYvsk50yArAkcwJ\
+      rMvyAR+IdfWLliCN+npZV+0OKEINv0rC1yaUTu9ppU7BFdDMA6Crfolk9HkRWKz3pHQgb\
+      faTbrUXMtWmZul972KokJ67HQiUHa0aVFj9ziWoIvFtVj534+e8rM8qYUIiCpJK9vaqI3\
+      CVsiugMHUaA2zcdZnCRFSb/8QO4Ix3wLU5mTpyDFuFEWdnszz1Pf0rCep+XSJ9EA3KH31\
+      EH26gpFNLGeikFSwKztSgvHVyptwbeC5+jgqlaQorHpa9lSUC+kZYNpwNfECaCaQxqQQ8\
+      KIqTpyHErccOo6RrBD1bBxWYteXChje6eRr0h5uev4S0DOJx+cuoWZcfOyt3fEweMOvmV\
+      Es="
+
 # Cache pip packages and pre-commit plugins to speed up builds
 cache:
   pip: true
