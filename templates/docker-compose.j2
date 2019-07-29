@@ -1,16 +1,24 @@
 ---
 version: '3'
 
+networks:
+  guacnet:
+    driver: bridge
+
 services:
   guacd:
     container_name: guacd
     image: "guacamole/guacd"
+    networks:
+      guacnet:
 
   postgres:
     container_name: postgres
     environment:
       POSTGRES_PASSWORD: {{ postgres_password }}
     image: "postgres:guac-postgres"
+    networks:
+      guacnet:
     volumes:
       - /tmp/init:/tmp
 
@@ -31,5 +39,7 @@ services:
     links:
       - guacd
       - postgres
+    networks:
+      guacnet:
     ports:
       - "8080:8080"
