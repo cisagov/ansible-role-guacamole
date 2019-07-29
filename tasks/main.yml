@@ -30,7 +30,7 @@
     path: /var/guacamole/
   register: guac_dir
 
-- name: Copy the files for the guacamole docker buils
+- name: Copy the files for the guacamole docker build
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
