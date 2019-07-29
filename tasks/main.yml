@@ -19,11 +19,13 @@
     name: postgres
     source: pull
 
-# Create the directory for postgres docker
-- name: Create a directory
+- name: Create guacamole and nginx directories
   file:
-    path: /var/guacamole
+    path: "{{ item }}"
     state: directory
+  with_items:
+    - /var/guacamole
+    - /var/guacamole/nginx
 
 - name: Register /var/guacamole
   stat:
