@@ -42,6 +42,8 @@
     - {src: 'Dockerfile.j2', dest: '/var/guacamole/Dockerfile'}
     - {src: 'init.j2', dest: '/var/guacamole/init.sh'}
     - {src: 'docker-compose.j2', dest: '/var/guacamole/docker-compose.yaml'}
+    - {src: 'nginx/nginx.conf', dest: '/var/guacamole/nginx/nginx.conf'}
+    - {src: 'nginx/site.template', dest: '/var/guacamole/nginx/site.template'}
 
 - name: Register initdb.sql
   stat:
