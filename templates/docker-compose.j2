@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '3.2'
 
 networks:
   guacnet:
@@ -42,4 +42,28 @@ services:
     networks:
       guacnet:
     ports:
-      - "8080:8080"
+      - "8080"
+
+  nginx:
+   container_name: nginx
+   image: nginx
+   volumes:
+     - type: bind
+       source: ./nginx/nginx.conf
+       target: /etc/nginx/nginx.conf
+       read_only: true
+     - type: bind
+       source: ./nginx/site.template
+       target: /etc/nginx/conf.d/site.template
+     - type: bind
+       source: ./nginx/ssl
+       target: /etc/nginx/ssl
+   ports:
+   - 8443:443
+   links:
+   - guacamole
+   networks:
+     guacnet:
+   # install openssl, create self-signed certificate and run nginx
+   # TODO: Replace self-signed cert with a real cert
+   command: /bin/bash -c "apt-get -y update && apt-get -y install openssl && openssl req -nodes -newkey rsa:2048 -new -x509 -keyout /etc/nginx/ssl/self-ssl.key -out /etc/nginx/ssl/self.cert -subj '/C=DE/ST=BY/L=Hintertupfing/O=Dorfwirt/OU=Theke/CN=www.createyourown.domain/emailAddress=docker@createyourown.domain' && cp -f -s /etc/nginx/conf.d/site.template /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
