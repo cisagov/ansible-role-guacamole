@@ -2,25 +2,21 @@
 version: '3'
 
 services:
-
   guacd:
-    image: "guacamole/guacd"
     container_name: guacd
+    image: "guacamole/guacd"
 
   postgres:
-    image: "postgres:guac-postgres"
+    container_name: postgres
     environment:
       POSTGRES_PASSWORD: {{ postgres_password }}
-    container_name: postgres
+    image: "postgres:guac-postgres"
     volumes:
       - /tmp/init:/tmp
 
   guacamole:
-    image: "guacamole/guacamole"
+    container_name: guacamole
     depends_on:
-      - guacd
-      - postgres
-    links:
       - guacd
       - postgres
     environment:
@@ -31,6 +27,9 @@ services:
       GUACD_PORT: 4822
       POSTGRES_HOSTNAME: postgres
       POSTGRES_PORT: 5432
-    container_name: guacamole
+    image: "guacamole/guacamole"
+    links:
+      - guacd
+      - postgres
     ports:
       - "8080:8080"
