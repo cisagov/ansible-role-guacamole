@@ -4,13 +4,14 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/context:python)
 
-An Ansible role for installing guacamole
-
-NOTE: SSM passwords must be setup before deployment
+An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition)
 
 ## Requirements ##
 
-None.
+The `postgres_username` and `postgres_password` variables
+(seen [here](vars/main.yml)) must be set up in
+[AWS Systems Manager](https://console.aws.amazon.com/systems-manage)
+(a.k.a. SSM) before this role can be used.
 
 ## Role Variables ##
 
