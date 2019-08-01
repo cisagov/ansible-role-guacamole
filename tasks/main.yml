@@ -20,6 +20,7 @@
   copy:
     content: "{{ item.contents }}"
     dest: "/var/guacamole/secrets/{{ item.filename }}"
+    mode: 0664
   with_items:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
