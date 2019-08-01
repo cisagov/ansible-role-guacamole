@@ -17,11 +17,9 @@
     creates: /var/guacamole/docker-compose.yml
 
 - name: Update dummy username/password with real values
-  lineinfile:
-    path: "/var/guacamole/secrets/{{ item.filename }}"
-    regexp: ".*"
-    line: "{{ item.contents }}"
-    mode: 0600
+  copy:
+    content: "{{ item.contents }}"
+    dest: "/var/guacamole/secrets/{{ item.filename }}"
   with_items:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
