@@ -14,6 +14,13 @@ platforms:
       - /var/lib/docker
     command: /lib/systemd/systemd
     pre_build_image: yes
+  - name: debian10_systemd
+    image: geerlingguy/docker-debian10-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
 provisioner:
   name: ansible
   lint:
