@@ -25,3 +25,23 @@
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
   no_log: true
+
+- name: Configure Guacamole service
+  block:
+    - name: Set up Guacamole as a systemd service
+      copy:
+        src: guacamole-composition.service
+        dest: /lib/systemd/system/
+        mode: 0644
+
+    - name: Systemd daemon-reload
+      systemd:
+        daemon_reload: true
+
+    - name: Start Guacamole systemd service and enable it to start on boot
+      systemd:
+        name: guacamole-composition.service
+        state: started
+        enabled: true
+  when:
+    - ansible_service_mgr == "systemd"
