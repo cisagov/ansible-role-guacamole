@@ -1,0 +1,16 @@
+[Unit]
+Description=Docker composition for Guacamole
+After=docker.service network.target multi-user.target cloud-final.service
+Requires=docker.service
+
+[Service]
+Restart=always
+# Stop containers (if running) when unit is stopped
+ExecStartPre=/usr/local/bin/docker-compose --file /var/guacamole/docker-compose.yml down
+# Start containers when unit is started
+ExecStart=/usr/local/bin/docker-compose --file /var/guacamole/docker-compose.yml up
+# Stop container when unit is stopped
+ExecStop=/usr/local/bin/docker-compose --file /var/guacamole/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
