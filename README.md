@@ -10,7 +10,7 @@ An Ansible role for installing [cisagov/guacamole-composition](https://github.co
 
 The `postgres_username` and `postgres_password` variables
 (seen [here](vars/main.yml)) must be set up in
-[AWS Systems Manager](https://console.aws.amazon.com/systems-manage)
+[AWS Systems Manager](https://aws.amazon.com/systems-manager/)
 (a.k.a. SSM) before this role can be used.
 
 ## Role Variables ##
