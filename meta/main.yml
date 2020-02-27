@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Kyle Evers
-  description: Install Gaucamole
+  description: Install Guacamole
   company: CISA Cyber Assessments
   license: CC0
   min_ansible_version: 2.0
