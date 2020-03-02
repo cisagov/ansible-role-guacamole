@@ -1,7 +1,0 @@
----
-# vars file for guacamole
-
-# The postgres database username for guacamole
-postgres_username: "{{ lookup('aws_ssm', '/guacamole/postgres_username') }}"
-# The postgres database password for guacamole
-postgres_password: "{{ lookup('aws_ssm', '/guacamole/postgres_password') }}"

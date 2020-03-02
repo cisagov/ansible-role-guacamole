@@ -1,0 +1,7 @@
+---
+# defaults file for guacamole
+
+# The postgres database username for guacamole
+postgres_username: "guacamole"
+# The postgres database password for guacamole
+postgres_password: "guacamole"
