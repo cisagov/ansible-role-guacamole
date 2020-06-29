@@ -11,34 +11,38 @@ platforms:
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/lib/docker
     command: /lib/systemd/systemd
     pre_build_image: yes
-  # Unfortunately, geerlingguy/docker-debian10-ansible:latest comes
-  # with only python3 installed, which is not the default python for
-  # this distribution.  (In other words, python3 does not get
-  # installed to /usr/bin/python.)
-  #
-  # This causes a problem if the Ansible role being tested results in
-  # python2 being installed, since at the beginning of the converge
-  # stage Ansible will detect that /usr/bin/python3 and /usr/bin/pip3
-  # are present while /usr/bin/python and /usr/bin/pip are not and
-  # therefore will use /usr/bin/python3 and /usr/bin/pip3.
-  #
-  # During the converge stage python2 gets installed to
-  # /usr/bin/python and pip2 gets installed to /usr/bin/pip, and so
-  # during the idempotence check Ansible will detect that
-  # /usr/bin/python and /usr/bin/pip are present and will use them.
-  # Some pip packages care if they are installed under pip2 or pip3,
-  # so those packages get reinstalled during the idempotence stage.
-  # This causes idempotence to fail.
-  #
-  # Fortunately for us, geerlingguy also creates a
-  # geerlingguy/docker-debian10-ansible:python2 image that comes with
-  # only python2 installed.  Therefore it makes sense for us to use
-  # that instead.
   - name: debian10_systemd
-    image: geerlingguy/docker-debian10-ansible:python2
+    image: geerlingguy/docker-debian10-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian11_systemd
+    image: cisagov/docker-debian11-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: kali_systemd
+    image: cisagov/docker-kali-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_bionic_systemd
+    image: geerlingguy/docker-ubuntu1604-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_xenial_systemd
+    image: geerlingguy/docker-ubuntu1804-ansible:latest
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

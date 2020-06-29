@@ -10,6 +10,14 @@ galaxy_info:
       versions:
         - stretch
         - buster
+        # Kali linux isn't an option here, but it is based on
+        # Debian Testing:
+        # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
   galaxy_tags:
     - guacamole
 
