@@ -16,3 +16,5 @@ galaxy_info:
 dependencies:
   - src: https://github.com/cisagov/ansible-role-docker
     name: docker
+  - src: https://github.com/cisagov/ansible-role-httpd
+    name: httpd
