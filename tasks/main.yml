@@ -58,7 +58,7 @@
 
     - name: Copy guacamole httpd configuration
       copy:
-        src: guacamole_httpd_configure
+        src: guacamole_httpd_config
         dest: /etc/apache2/sites-available/guacamole.conf
         mode: 0644
 
