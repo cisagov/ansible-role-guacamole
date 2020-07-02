@@ -45,3 +45,25 @@
         enabled: true
   when:
     - ansible_service_mgr == "systemd"
+
+- name: Configure httpd and PAM for guacamole
+  block:
+    - name: Copy guacamole PAM configuration
+      copy:
+        content: |
+            auth    required   pam_sss.so
+            account required   pam_sss.so
+        dest: /etc/pam.d/guacamole
+        mode: 0644
+
+    - name: Copy guacamole httpd configuration
+      copy:
+        src: guacamole_httpd_configure
+        dest: /etc/apache2/sites-available/guacamole.conf
+        mode: 0644
+
+    - name: Enable guacamole httpd configuration
+      file:
+        src: /etc/apache2/sites-available/guacamole.conf
+        dest: /etc/apache2/sites-enabled/guacamole.conf
+        state: link
