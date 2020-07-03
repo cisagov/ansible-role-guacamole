@@ -30,7 +30,7 @@
         ProxyPass http://localhost/guacamole/
         ProxyPassReverse http://localhost/guacamole/
 
-        RequestHeader set REMOTE_USER rta
+        RequestHeader set REMOTE_USER guacuser
     </Location>
 
     <Location /admin>
