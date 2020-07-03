@@ -33,14 +33,14 @@
         RequestHeader set REMOTE_USER guacuser
     </Location>
 
-    <Location /admin>
+    <Location /admin/>
         AuthType GSSAPI
         AuthName "FreeIPA Kerberos Login for Guacamole Administrators"
         GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
         Session on
-        SessionCookieName gssapi_session path=/admin;httponly;secure;
+        SessionCookieName gssapi_session path=/admin/;httponly;secure;
 
         require pam-account guacamole-admin
 
