@@ -45,19 +45,24 @@
   when:
     - ansible_service_mgr == "systemd"
 
-- name: Configure httpd and PAM for guacamole
-  block:
-    - name: Copy guacamole PAM configuration
-      copy:
-        content: |
-            auth    required   pam_sss.so
-            account required   pam_sss.so
-        dest: /etc/pam.d/{{ item }}
-        mode: 0644
-      loop:
-        - guacamole
-        - guacamole-admin
+- name: Configure PAM for guacamole and guacamole-admin services
+  copy:
+    content: |
+        auth    required   pam_sss.so
+        account required   pam_sss.so
+    dest: /etc/pam.d/{{ item }}
+    mode: 0644
+  loop:
+    - guacamole
+    - guacamole-admin
 
+  # * Disable port 80
+  # * Create guacamole and guacamole-admin services
+  # * Determine if we can get by with only the HTTP keytab in httpd
+  # configuration or if we need the host keytab as well.
+  # * Fix below tasks for non-Debian hosts
+- name: Configure httpd for guacamole
+  block:
     - name: Disable default httpd configuration
       file:
         path: /etc/apache2/sites-enabled/000-default.conf
