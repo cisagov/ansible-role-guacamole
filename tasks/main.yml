@@ -63,6 +63,12 @@
   # * Fix below tasks for non-Debian hosts
 - name: Configure httpd for guacamole
   block:
+    - name: Disable listening on port 80
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        state: absent
+        regexp: Listen 80
+
     - name: Disable default httpd configuration
       file:
         path: /etc/apache2/sites-enabled/000-default.conf
