@@ -52,8 +52,16 @@
         content: |
             auth    required   pam_sss.so
             account required   pam_sss.so
-        dest: /etc/pam.d/guacamole
+        dest: /etc/pam.d/{{ item }}
         mode: 0644
+      loop:
+        - guacamole
+        - guacamole-admin
+
+    - name: Disable default httpd configuration
+      file:
+        path: /etc/apache2/sites-enabled/000-default.conf
+        state: absent
 
     - name: Copy guacamole httpd configuration
       copy:
