@@ -18,8 +18,8 @@
 
     <Location />
         AuthType GSSAPI
-        AuthName "FreeIPA Kerberos Login for Guacamole"
-        GssapiCredStore keytab:/etc/krb5.keytab
+        AuthName "FreeIPA Kerberos Login for Guacamole Users"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
         Session on
@@ -35,8 +35,8 @@
 
     <Location /admin>
         AuthType GSSAPI
-        AuthName "FreeIPA Kerberos Login for Guacamole"
-        GssapiCredStore keytab:/etc/krb5.keytab
+        AuthName "FreeIPA Kerberos Login for Guacamole Administrators"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
         Session on
