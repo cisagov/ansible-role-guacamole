@@ -13,8 +13,8 @@
 
     SSLEngine on
 
-    SSLCertificateFile /var/guacamole/nginx/ssl/self.cert
-    SSLCertificateKeyFile /var/guacamole/nginx/ssl/self-ssl.key
+    SSLCertificateFile /var/guacamole/httpd/ssl/self.cert
+    SSLCertificateKeyFile /var/guacamole/httpd/ssl/self-ssl.key
 
     <Location />
         AuthType GSSAPI
