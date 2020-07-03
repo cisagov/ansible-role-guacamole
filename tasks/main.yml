@@ -85,3 +85,9 @@
         src: /etc/apache2/sites-available/guacamole.conf
         dest: /etc/apache2/sites-enabled/guacamole.conf
         state: link
+
+- name: Copy setup script
+  copy:
+    src: setup_guacamole_services.sh
+    dest: /usr/local/sbin
+    mode: 0700
