@@ -26,9 +26,9 @@
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
   no_log: true
 
-- name: Configure Guacamole service
+- name: Configure guacamole service
   block:
-    - name: Set up Guacamole as a systemd service
+    - name: Set up guacamole as a systemd service
       copy:
         src: guacamole-composition.service
         dest: /lib/systemd/system/
@@ -38,7 +38,7 @@
       systemd:
         daemon_reload: true
 
-    - name: Enable Guacamole systemd service
+    - name: Enable guacamole systemd service
       systemd:
         name: guacamole-composition.service
         enabled: true
