@@ -38,10 +38,9 @@
       systemd:
         daemon_reload: true
 
-    - name: Start Guacamole systemd service and enable it to start on boot
+    - name: Enable Guacamole systemd service
       systemd:
         name: guacamole-composition.service
-        state: started
         enabled: true
   when:
     - ansible_service_mgr == "systemd"
