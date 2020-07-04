@@ -30,20 +30,29 @@ else
     exit 254
 fi
 
-# Get the default Ethernet interface
+# Get the default Ethernet interface.
+#
+# Returns the default Ethernet interface.
 function get_interface {
     ip route | grep default | sed "s/^.* dev \([^ ]*\).*$/\1/"
 }
 
-# Get the IP address corresponding to an interface
+# Get the IP address corresponding to an interface.
+#
+# Parameters:
+# $1 - the interface name
+#
+# Returns the IP address corresponding to the specified interface.
 function get_ip {
     ip --family inet address show dev "$1" | \
         grep --perl-regexp --only-matching 'inet \K[\d.]+'
 }
 
+# Create the FreeIPA service if it does not already exist.
+#
+# Parameters:
+# $1 - the service name
 function create_service_if_needed {
-    # Create the $1/$hostname service if it does not already exist.
-    #
     # Since the service may not be found, which returns an error code,
     # we need to temporarily turn off errexit for this.
     set +o errexit
@@ -68,5 +77,6 @@ function create_service_if_needed {
     fi
 }
 
+# Create the guacamole services, if needed.
 create_service_if_needed "guacamole"
 create_service_if_needed "guacamole-admin"
