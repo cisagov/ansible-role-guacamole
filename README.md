@@ -4,7 +4,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/context:python)
 
-An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition)
+An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
 
 ## Requirements ##
 
@@ -16,13 +16,8 @@ None.
 
 ## Dependencies ##
 
-Docker is a dependency found here:
-
-```yaml
-dependencies:
-  - src: https://github.com/cisagov/ansible-role-docker
-    name: docker
-```
+* [cisagov/ansible-role-docker](https;//github.com/cisagov/ansible-role-docker)
+* [cisagov/ansible-role-httpd](https;//github.com/cisagov/ansible-role-httpd)
 
 ## Example Playbook ##
 
