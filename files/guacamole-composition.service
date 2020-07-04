@@ -1,6 +1,6 @@
 [Unit]
 Description=Docker composition for Guacamole
-After=docker.service network.target multi-user.target cloud-final.service
+After=docker.service network.target multi-user.target
 Requires=docker.service
 
 [Service]
