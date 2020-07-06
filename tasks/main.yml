@@ -71,6 +71,26 @@
         path: /etc/apache2/sites-enabled/000-default.conf
         state: absent
 
+    # This helps us with idempotence, since if we tell apache2ctl not
+    # to check the config then it blindly tries to install all the
+    # modules again when it installs cisagov/ansible-role-httpd a
+    # second time and fails.
+    - name: Create dummy non-empty SSL cert files so apache2ctl thinks the config is valid
+      block:
+        - name: Ensure cert directory exists
+          file:
+            path: /var/guacamole/httpd/ssl
+            state: directory
+            mode: 0755
+        - name: Create dummy cert files
+          copy:
+            content: Hello
+            dest: /var/guacamole/httpd/ssl/{{ item }}
+            mode: 0644
+          loop:
+            - self.cert
+            - self-ssl.key
+
     - name: Copy guacamole httpd configuration
       copy:
         src: guacamole_httpd_config
