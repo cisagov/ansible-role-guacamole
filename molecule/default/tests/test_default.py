@@ -14,9 +14,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 @pytest.mark.parametrize("d", ["/var/guacamole", "/var/guacamole/httpd/ssl"])
 def test_directories(host, d):
-    """Test that the expected directories were created."""
+    """Test that the expected directories were created and are not empty."""
     assert host.file(d).exists
     assert host.file(d).is_directory
+    assert host.file(d).listdir()
     assert host.file(d).mode == 0o755
 
 
