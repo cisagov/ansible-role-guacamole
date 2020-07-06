@@ -83,6 +83,21 @@
         dest: /etc/apache2/sites-enabled/guacamole.conf
         state: link
 
+    # The SSL certificates for the web server aren't available until
+    # cloud-final has completed.
+    - name: Ensure that httpd only starts after cloud-final has competed
+      lineinfile:
+        path: /lib/systemd/system/apache2.service
+        backrefs: yes
+        # The exclamation mark forces us to quote the string because
+        # it is a special character in YAML.
+        #
+        # The (?!...) jazz is a negative look-ahead assertion.  See
+        # here, for example:
+        # https://docs.python.org/3/library/re.html
+        regexp: '^After=(.*)(?! cloud\-final\.service)$'
+        line: After=\1 cloud-final.service
+
 - name: Copy setup script
   copy:
     src: setup_guacamole_services.sh
