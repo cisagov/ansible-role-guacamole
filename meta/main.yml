@@ -16,7 +16,10 @@ galaxy_info:
         - bullseye
     - name: Ubuntu
       versions:
-        - bionic
+        # The apache2.service file does not appear to be present when
+        # apache is installed on bionic.  I'm not sure what is going
+        # on there, but until that changes we can't support bionic.
+        # - bionic
         - xenial
   galaxy_tags:
     - guacamole
