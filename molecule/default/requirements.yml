@@ -3,6 +3,5 @@
   name: docker
 - src: https://github.com/cisagov/ansible-role-httpd
   name: httpd
-  version: feature/kerberize
 - src: https://github.com/cisagov/ansible-role-pip
   name: pip
