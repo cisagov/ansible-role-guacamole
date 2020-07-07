@@ -10,9 +10,22 @@ galaxy_info:
       versions:
         - stretch
         - buster
+        # Kali linux isn't an option here, but it is based on
+        # Debian Testing:
+        # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
+        - bullseye
+    - name: Ubuntu
+      versions:
+        # The apache2.service file does not appear to be present when
+        # apache is installed on xenial.  I'm not sure what is going
+        # on there, but until that changes we can't support xenial.
+        # - xenial
+        - bionic
   galaxy_tags:
     - guacamole
 
 dependencies:
   - src: https://github.com/cisagov/ansible-role-docker
     name: docker
+  - src: https://github.com/cisagov/ansible-role-httpd
+    name: httpd

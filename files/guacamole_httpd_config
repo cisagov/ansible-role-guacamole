@@ -1,0 +1,52 @@
+<VirtualHost *:443>
+    ServerAdmin ncats-dev@beta.dhs.gov
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice,
+    # warn, error, crit, alert, emerg.
+    #
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    # LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    SSLEngine on
+
+    SSLCertificateFile /var/guacamole/httpd/ssl/self.cert
+    SSLCertificateKeyFile /var/guacamole/httpd/ssl/self-ssl.key
+
+    <Location />
+        AuthType GSSAPI
+        AuthName "FreeIPA Kerberos Login for Guacamole Users"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
+        GssapiSSLonly On
+        GssapiUseSessions On
+        Session on
+        SessionCookieName gssapi_session path=/;httponly;secure;
+
+        require pam-account guacamole
+
+        ProxyPass http://localhost/guacamole/
+        ProxyPassReverse http://localhost/guacamole/
+
+        RequestHeader set REMOTE_USER guacuser
+    </Location>
+
+    <Location /admin/>
+        AuthType GSSAPI
+        AuthName "FreeIPA Kerberos Login for Guacamole Administrators"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
+        GssapiSSLonly On
+        GssapiUseSessions On
+        Session on
+        SessionCookieName gssapi_session path=/admin/;httponly;secure;
+
+        require pam-account guacamole-admin
+
+        ProxyPass http://localhost/guacamole/
+        ProxyPassReverse http://localhost/guacamole/
+
+        RequestHeader set REMOTE_USER guacadmin
+    </Location>
+</VirtualHost>
