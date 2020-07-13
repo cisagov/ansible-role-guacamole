@@ -125,4 +125,4 @@
   copy:
     src: setup_guacamole_services.sh
     dest: /usr/local/sbin
-    mode: 0700
+    mode: 0500
