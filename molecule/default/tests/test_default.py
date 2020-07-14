@@ -29,7 +29,7 @@ def test_directories(host, d):
         ("/var/guacamole/httpd/ssl/self.cert", 0o644),
         ("/var/guacamole/httpd/ssl/self-ssl.key", 0o644),
         ("/etc/apache2/sites-available/guacamole.conf", 0o644),
-        ("/usr/local/sbin/setup_guacamole_services.sh", 0o700),
+        ("/usr/local/sbin/02_setup_guacamole_services.sh", 0o500),
     ],
 )
 def test_files(host, f, perms):

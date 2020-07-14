@@ -123,6 +123,6 @@
 
 - name: Copy setup script
   copy:
-    src: setup_guacamole_services.sh
+    src: 02_setup_guacamole_services.sh
     dest: /usr/local/sbin
-    mode: 0700
+    mode: 0500
