@@ -1,17 +1,6 @@
 ---
-# The Ubuntu Docker images we are using
-# (geerlingguy/docker-ubuntu1604-ansible:latest and
-# geerlingguy/docker-ubuntu1804-ansible:latest) require a cache update
-# before they can install anything.
-- name: Group hosts by OS distribution
-  hosts: all
-  tasks:
-    - name: Group hosts by OS distribution
-      group_by:
-        key: os_{{ ansible_distribution }}
-- name: Update apt cache (Ubuntu)
-  hosts: os_Ubuntu
-  tasks:
-    - name: Update apt cache
-      apt:
-        update_cache: yes
+- name: Import upgrade playbook
+  import_playbook: upgrade.yml
+
+- name: Import python playbook
+  import_playbook: python.yml
