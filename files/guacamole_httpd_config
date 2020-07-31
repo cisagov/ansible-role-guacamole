@@ -11,7 +11,7 @@
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-    SSLEngine on
+    SSLEngine On
 
     SSLCertificateFile /var/guacamole/httpd/ssl/self.cert
     SSLCertificateKeyFile /var/guacamole/httpd/ssl/self-ssl.key
@@ -22,13 +22,31 @@
         GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
-        Session on
+        Session On
         SessionCookieName gssapi_session path=/;httponly;secure;
 
         require pam-account guacamole
 
-        ProxyPass http://localhost/guacamole/
+        ProxyPass http://localhost/guacamole/ flushpackets=on
         ProxyPassReverse http://localhost/guacamole/
+        ProxyPassReverseCookiePath /guacamole/ /
+
+        RequestHeader set REMOTE_USER guacuser
+    </Location>
+
+    <Location /websocket-tunnel>
+        AuthType GSSAPI
+        AuthName "FreeIPA Kerberos Login for Guacamole Users"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
+        GssapiSSLonly On
+        GssapiUseSessions On
+        Session On
+        SessionCookieName gssapi_session path=/websocket-tunnel;httponly;secure;
+
+        require pam-account guacamole
+
+        ProxyPass ws://localhost/guacamole/websocket-tunnel
+        ProxyPassReverse ws://localhost/guacamole/websocket-tunnel
 
         RequestHeader set REMOTE_USER guacuser
     </Location>
@@ -39,13 +57,31 @@
         GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
-        Session on
+        Session On
         SessionCookieName gssapi_session path=/admin/;httponly;secure;
 
         require pam-account guacamole-admin
 
-        ProxyPass http://localhost/guacamole/
+        ProxyPass http://localhost/guacamole/ flushpackets=on
         ProxyPassReverse http://localhost/guacamole/
+        ProxyPassReverseCookiePath /guacamole/ /admin/
+
+        RequestHeader set REMOTE_USER guacadmin
+    </Location>
+
+    <Location /admin/websocket-tunnel>
+        AuthType GSSAPI
+        AuthName "FreeIPA Kerberos Login for Guacamole Administrators"
+        GssapiCredStore keytab:/etc/krb5_http.keytab
+        GssapiSSLonly On
+        GssapiUseSessions On
+        Session On
+        SessionCookieName gssapi_session path=/admin/websocket-tunnel;httponly;secure;
+
+        require pam-account guacamole-admin
+
+        ProxyPass ws://localhost/guacamole/websocket-tunnel
+        ProxyPassReverse ws://localhost/guacamole/websocket-tunnel
 
         RequestHeader set REMOTE_USER guacadmin
     </Location>
