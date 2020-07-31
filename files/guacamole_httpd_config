@@ -27,8 +27,9 @@
 
         require pam-account guacamole
 
-        ProxyPass http://localhost/guacamole flushpackets=on
-        ProxyPassReverse http://localhost/guacamole
+        ProxyPass http://localhost/guacamole/ flushpackets=on
+        ProxyPassReverse http://localhost/guacamole/
+        ProxyPassReverseCookiePath /guacamole/ /
 
         RequestHeader set REMOTE_USER guacuser
     </Location>
@@ -50,19 +51,20 @@
         RequestHeader set REMOTE_USER guacuser
     </Location>
 
-    <Location /admin>
+    <Location /admin/>
         AuthType GSSAPI
         AuthName "FreeIPA Kerberos Login for Guacamole Administrators"
         GssapiCredStore keytab:/etc/krb5_http.keytab
         GssapiSSLonly On
         GssapiUseSessions On
         Session On
-        SessionCookieName gssapi_session path=/admin;httponly;secure;
+        SessionCookieName gssapi_session path=/admin/;httponly;secure;
 
         require pam-account guacamole-admin
 
-        ProxyPass http://localhost/guacamole flushpackets=on
-        ProxyPassReverse http://localhost/guacamole
+        ProxyPass http://localhost/guacamole/ flushpackets=on
+        ProxyPassReverse http://localhost/guacamole/
+        ProxyPassReverseCookiePath /guacamole/ /admin/
 
         RequestHeader set REMOTE_USER guacadmin
     </Location>
