@@ -3,6 +3,8 @@ galaxy_info:
   author: Kyle Evers
   description: Install Guacamole
   company: CISA Cyber Assessments
+  galaxy_tags:
+    - guacamole
   license: CC0
   min_ansible_version: 2.0
   platforms:
@@ -21,8 +23,7 @@ galaxy_info:
         # on there, but until that changes we can't support xenial.
         # - xenial
         - bionic
-  galaxy_tags:
-    - guacamole
+  role_name: guacamole
 
 dependencies:
   - src: https://github.com/cisagov/ansible-role-docker
