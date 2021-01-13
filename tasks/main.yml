@@ -19,7 +19,7 @@
 - name: Update dummy username/password with real values
   copy:
     content: "{{ item.contents }}"
-    dest: "/var/guacamole/secrets/{{ item.filename }}"
+    dest: "/var/guacamole/src/secrets/{{ item.filename }}"
     mode: 0664
   loop:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
