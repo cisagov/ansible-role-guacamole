@@ -16,6 +16,28 @@
       - "--strip-components=1"
     creates: /var/guacamole/docker-compose.yml
 
+- name: Pull the Docker images used by the Guacamole Docker composition
+  block:
+    # Docker is only enabled in ansible-role-docker, but we need it to
+    # actually be running in order to pull Docker images.
+    - name: Start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    # Ideally we'd use the community.general.docker_compose Ansible
+    # module for pulling the images, but that module does not allow
+    # for pulling images without actually starting up the composition.
+    - name: >
+        Pull Docker images used by the Guacamole Docker composition
+      community.general.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        - guacamole/guacd
+        - guacamole/guacamole
+        - postgres
+
 - name: Update dummy username/password with real values
   ansible.builtin.copy:
     content: "{{ item.contents }}"
@@ -24,7 +46,8 @@
   loop:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
-  no_log: true
+  loop_control:
+    label: "{{ item.filename }}"
 
 - name: Configure guacamole service
   block:
