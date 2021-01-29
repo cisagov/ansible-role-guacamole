@@ -66,3 +66,11 @@ def test_apache2_unit_modification(host):
     assert host.file("/lib/systemd/system/apache2.service").contains(
         r"After=.* cloud-final.service"
     )
+
+
+@pytest.mark.parametrize(
+    "image", ["guacamole/guacd", "guacamole/guacamole", "postgres"]
+)
+def test_docker_images_pulled(host, image):
+    """Test that the Docker images used by the Guacamole Docker composition are present."""
+    assert image in host.check_output("docker images")
