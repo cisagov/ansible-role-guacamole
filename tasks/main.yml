@@ -1,13 +1,13 @@
 ---
 # tasks file for guacamole
 - name: Create the /var/guacamole directory
-  file:
+  ansible.builtin.file:
     path: /var/guacamole
     state: directory
     mode: 0755
 
 - name: Download and untar the guacamole-composition tarball
-  unarchive:
+  ansible.builtin.unarchive:
     src: >
       https://api.github.com/repos/cisagov/guacamole-composition/tarball/develop
     dest: /var/guacamole
@@ -16,37 +16,60 @@
       - "--strip-components=1"
     creates: /var/guacamole/docker-compose.yml
 
+- name: Pull the Docker images used by the Guacamole Docker composition
+  block:
+    # Docker is only enabled in ansible-role-docker, but we need it to
+    # actually be running in order to pull Docker images.
+    - name: Start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    # Ideally we'd use the community.general.docker_compose Ansible
+    # module for pulling the images, but that module does not allow
+    # for pulling images without actually starting up the composition.
+    - name: >
+        Pull Docker images used by the Guacamole Docker composition
+      community.general.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        - guacamole/guacd
+        - guacamole/guacamole
+        - postgres
+
 - name: Update dummy username/password with real values
-  copy:
+  ansible.builtin.copy:
     content: "{{ item.contents }}"
     dest: "/var/guacamole/src/secrets/{{ item.filename }}"
     mode: 0664
   loop:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
-  no_log: true
+  loop_control:
+    label: "{{ item.filename }}"
 
 - name: Configure guacamole service
   block:
     - name: Set up guacamole as a systemd service
-      copy:
+      ansible.builtin.copy:
         src: guacamole-composition.service
         dest: /lib/systemd/system/
         mode: 0644
 
     - name: Systemd daemon-reload
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: true
 
     - name: Enable guacamole systemd service
-      systemd:
+      ansible.builtin.systemd:
         name: guacamole-composition.service
         enabled: true
   when:
     - ansible_service_mgr == "systemd"
 
 - name: Configure PAM for guacamole and guacamole-admin services
-  copy:
+  ansible.builtin.copy:
     content: |
         auth    required   pam_sss.so
         account required   pam_sss.so
@@ -61,13 +84,13 @@
 - name: Configure httpd for guacamole
   block:
     - name: Disable listening on port 80
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/apache2/ports.conf
         state: absent
         regexp: Listen 80
 
     - name: Disable default httpd configuration
-      file:
+      ansible.builtin.file:
         path: /etc/apache2/sites-enabled/000-default.conf
         state: absent
 
@@ -78,12 +101,12 @@
     - name: Create dummy non-empty SSL cert files so apache2ctl thinks the config is valid
       block:
         - name: Ensure cert directory exists
-          file:
+          ansible.builtin.file:
             path: /var/guacamole/httpd/ssl
             state: directory
             mode: 0755
         - name: Create dummy cert files
-          copy:
+          ansible.builtin.copy:
             content: Hello
             dest: /var/guacamole/httpd/ssl/{{ item }}
             mode: 0644
@@ -92,13 +115,13 @@
             - self-ssl.key
 
     - name: Copy guacamole httpd configuration
-      copy:
+      ansible.builtin.copy:
         src: guacamole_httpd_config
         dest: /etc/apache2/sites-available/guacamole.conf
         mode: 0644
 
     - name: Enable guacamole httpd configuration
-      file:
+      ansible.builtin.file:
         src: /etc/apache2/sites-available/guacamole.conf
         dest: /etc/apache2/sites-enabled/guacamole.conf
         state: link
@@ -106,7 +129,7 @@
     # The real SSL certificates for the web server aren't available
     # until cloud-final has completed.
     - name: Ensure that httpd only starts after cloud-final has completed
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /lib/systemd/system/apache2.service
         backrefs: yes
         # The exclamation mark forces us to quote the string because
@@ -122,7 +145,7 @@
         line: After=\1 cloud-final.service
 
 - name: Copy setup script
-  copy:
+  ansible.builtin.copy:
     src: 02_setup_guacamole_services.sh
     dest: /usr/local/sbin
     mode: 0500
