@@ -22,10 +22,6 @@ galaxy_info:
         - bullseye
     - name: Ubuntu
       versions:
-        # The apache2.service file does not appear to be present when
-        # apache is installed on xenial.  I'm not sure what is going
-        # on there, but until that changes we can't support xenial.
-        # - xenial
         - bionic
         - focal
   role_name: guacamole
