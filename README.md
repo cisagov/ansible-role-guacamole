@@ -16,8 +16,8 @@ None.
 
 ## Dependencies ##
 
-* [cisagov/ansible-role-docker](https;//github.com/cisagov/ansible-role-docker)
-* [cisagov/ansible-role-httpd](https;//github.com/cisagov/ansible-role-httpd)
+- [cisagov/ansible-role-docker](https;//github.com/cisagov/ansible-role-docker)
+- [cisagov/ansible-role-httpd](https;//github.com/cisagov/ansible-role-httpd)
 
 ## Example Playbook ##
 

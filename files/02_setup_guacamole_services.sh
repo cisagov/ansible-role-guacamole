@@ -17,8 +17,7 @@ set -o pipefail
 freeipa_vars_file=/var/lib/cloud/instance/freeipa-vars.sh
 
 # Load above variable from a file installed by cloud-init:
-if [[ -f "$freeipa_vars_file" ]]
-then
+if [[ -f "$freeipa_vars_file" ]]; then
   # Disable this warning since the file is only available at runtime
   # on the server.
   #
@@ -44,8 +43,8 @@ function get_interface {
 #
 # Returns the IP address corresponding to the specified interface.
 function get_ip {
-  ip --family inet address show dev "$1" | \
-    grep --perl-regexp --only-matching 'inet \K[\d.]+'
+  ip --family inet address show dev "$1" \
+    | grep --perl-regexp --only-matching 'inet \K[\d.]+'
 }
 
 # Create the FreeIPA service if it does not already exist.
@@ -64,8 +63,7 @@ function create_service_if_needed {
   ipa service-find --canonical-principal="$1/$hostname"
   rc=$?
   set -o errexit
-  if [[ $rc -ne 0 ]]
-  then
+  if [[ $rc -ne 0 ]]; then
     ipa service-add "$1/$hostname"
     # Grab our IP address
     interface=$(get_interface)
