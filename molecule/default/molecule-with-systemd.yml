@@ -45,6 +45,7 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
     pre_build_image: yes
+<<<<<<< HEAD
   # RedHat support was removed from this Ansible role.  I'm not sure
   # why.
   # - name: fedora32_systemd
@@ -61,6 +62,29 @@ platforms:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
   #   command: /lib/systemd/systemd
   #   pre_build_image: yes
+=======
+  - name: fedora32_systemd
+    image: geerlingguy/docker-fedora32-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora33_systemd
+    image: geerlingguy/docker-fedora33-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora34_systemd
+    image: geerlingguy/docker-fedora34-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+>>>>>>> e29f8faf7dfd7724cff57bd48d882d164a6491ec
   - name: ubuntu_18_systemd
     image: geerlingguy/docker-ubuntu1804-ansible:latest
     privileged: yes
