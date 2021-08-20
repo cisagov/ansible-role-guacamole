@@ -20,14 +20,12 @@ galaxy_info:
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
         - bullseye
-<<<<<<< HEAD
-=======
-    - name: Fedora
-      versions:
-        - 32
-        - 33
-        - 34
->>>>>>> e29f8faf7dfd7724cff57bd48d882d164a6491ec
+    # RedHat support was removed from this Ansible role.  I'm not sure why.
+    # - name: Fedora
+    #   versions:
+    #     - 32
+    #     - 33
+    #     - 34
     - name: Ubuntu
       versions:
         - bionic
