@@ -12,7 +12,6 @@ None.
 
 ## Role Variables ##
 
-
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |

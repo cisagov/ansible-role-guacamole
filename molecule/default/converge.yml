@@ -5,3 +5,11 @@
     - name: Include ansible-role-guacamole
       ansible.builtin.include_role:
         name: ansible-role-guacamole
+      vars:
+        postgres_username: postgres_user
+        postgres_password: postgres_password
+        private_ssh_key: dummy_key
+        rdp_username: rdp_user
+        rdp_password: rdp_password
+        vnc_username: vnc_user
+        vnc_password: vnc_password
