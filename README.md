@@ -12,14 +12,16 @@ None.
 
 ## Role Variables ##
 
-None.
 
-<!--
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| optional_variable | Describe its purpose. | `default_value` | No |
-| required_variable | Describe its purpose. | n/a | Yes |
--->
+| postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
+| postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
+| private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
+| rdp_username | The username for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
+| rdp_password | The password for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
+| rdp_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| rdp_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
 
 ## Dependencies ##
 
@@ -35,7 +37,15 @@ Here's how to use it in a playbook:
   become: yes
   become_method: sudo
   roles:
-    - guacamole
+    - role: guacamole
+      vars:
+          postgres_username: postgres_user
+          postgres_password: postgres_password
+          private_ssh_key: dummy_key
+          rdp_username: rdp_user
+          rdp_password: rdp_password
+          vnc_username: vnc_user
+          vnc_password: vnc_password
 ```
 
 ## Contributing ##
