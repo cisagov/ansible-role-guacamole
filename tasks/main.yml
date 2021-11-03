@@ -47,6 +47,11 @@
   loop:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
+    - {filename: "private-ssh-key", contents: "{{ private_ssh_key }}"}
+    - {filename: "rdp-username", contents: "{{ rdp_username }}"}
+    - {filename: "rdp-password", contents: "{{ rdp_password }}"}
+    - {filename: "vnc-username", contents: "{{ vnc_username }}"}
+    - {filename: "vnc-password", contents: "{{ vnc_password }}"}
   loop_control:
     label: "{{ item.filename }}"
 
