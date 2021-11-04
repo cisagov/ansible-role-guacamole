@@ -37,7 +37,10 @@
         - cisagov/guacscanner
         - guacamole/guacd
         - guacamole/guacamole
-        - postgres
+        # The version of the JDBC PostgreSQL driver included in the
+        # Guacamole Docker image is too old to work with PostgreSQL 14
+        # or later.
+        - postgres:13
 
 - name: Update dummy username/password with real values
   ansible.builtin.copy:
