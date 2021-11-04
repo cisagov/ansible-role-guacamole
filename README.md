@@ -19,8 +19,8 @@ None.
 | private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
 | rdp_username | The username for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
 | rdp_password | The password for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
-| rdp_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
-| rdp_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| vnc_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| vnc_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
 
 ## Dependencies ##
 
