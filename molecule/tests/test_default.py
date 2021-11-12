@@ -69,7 +69,8 @@ def test_apache2_unit_modification(host):
 
 
 @pytest.mark.parametrize(
-    "image", ["guacamole/guacd", "guacamole/guacamole", "postgres"]
+    "image",
+    ["cisagov/guacscanner", "guacamole/guacd", "guacamole/guacamole", "postgres"],
 )
 def test_docker_images_pulled(host, image):
     """Test that the Docker images used by the Guacamole Docker composition are present."""

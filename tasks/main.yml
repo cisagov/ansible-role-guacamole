@@ -34,9 +34,14 @@
         name: "{{ item }}"
         source: pull
       loop:
+        - cisagov/guacscanner
         - guacamole/guacd
         - guacamole/guacamole
-        - postgres
+        # The version of the JDBC PostgreSQL driver included in the
+        # Guacamole Docker image (the one tagged "latest", as of
+        # November 5, 2021) is too old to work with PostgreSQL 14 or
+        # later.
+        - postgres:13
 
 - name: Update dummy username/password with real values
   ansible.builtin.copy:
@@ -46,6 +51,11 @@
   loop:
     - {filename: "postgres-username", contents: "{{ postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ postgres_password }}"}
+    - {filename: "private-ssh-key", contents: "{{ private_ssh_key }}"}
+    - {filename: "rdp-username", contents: "{{ rdp_username }}"}
+    - {filename: "rdp-password", contents: "{{ rdp_password }}"}
+    - {filename: "vnc-username", contents: "{{ vnc_username }}"}
+    - {filename: "vnc-password", contents: "{{ vnc_password }}"}
   loop_control:
     label: "{{ item.filename }}"
 
