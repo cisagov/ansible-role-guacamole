@@ -56,6 +56,7 @@
     - {filename: "rdp-password", contents: "{{ rdp_password }}"}
     - {filename: "vnc-username", contents: "{{ vnc_username }}"}
     - {filename: "vnc-password", contents: "{{ vnc_password }}"}
+    - {filename: "windows-sftp-base", contents: "{{ windows_sftp_base }}"}
   loop_control:
     label: "{{ item.filename }}"
 

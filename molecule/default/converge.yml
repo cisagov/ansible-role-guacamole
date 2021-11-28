@@ -13,3 +13,4 @@
         rdp_password: rdp_password
         vnc_username: vnc_user
         vnc_password: vnc_password
+        windows_sftp_base: /C:/Users/vnc_user
