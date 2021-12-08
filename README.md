@@ -21,6 +21,7 @@ None.
 | rdp_password | The password for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
 | vnc_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
 | vnc_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| windows_sftp_base | The base path for the SFTP directories that Guacamole will use when connecting to a Windows instance via VNC. | n/a | Yes |
 
 ## Dependencies ##
 
@@ -45,6 +46,7 @@ Here's how to use it in a playbook:
           rdp_password: rdp_password
           vnc_username: vnc_user
           vnc_password: vnc_password
+          windows_sftp_base: /C:/Users/vnc_user
 ```
 
 ## Contributing ##
