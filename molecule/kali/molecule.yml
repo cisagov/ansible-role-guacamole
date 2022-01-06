@@ -15,7 +15,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: kali_systemd
+  - name: kali-systemd
     image: cisagov/docker-kali-ansible:latest
     privileged: yes
     volumes:
