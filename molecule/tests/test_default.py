@@ -70,8 +70,19 @@ def test_apache2_unit_modification(host):
 
 @pytest.mark.parametrize(
     "image",
-    ["cisagov/guacscanner", "guacamole/guacd", "guacamole/guacamole", "postgres"],
+    [
+        "cisagov/guacscanner:1.1.6",
+        "guacamole/guacd:latest",
+        "guacamole/guacamole:latest",
+        "postgres:13",
+    ],
 )
 def test_docker_images_pulled(host, image):
     """Test that the Docker images used by the Guacamole Docker composition are present."""
-    assert image in host.check_output("docker images")
+    assert image in host.check_output(
+        # Unfortunately Jinja and Go templates use the same
+        # double-bracket syntax, so we have to force Jinja to ignore
+        # it so the Go template gets passed along to the docker
+        # command.
+        "docker images --format='{% raw %}{{.Repository}}:{{.Tag}}{% endraw %}'"
+    )
