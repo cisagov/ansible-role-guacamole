@@ -17,10 +17,11 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - bullseye
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        - bullseye
+        - bookworm
     # RedHat support was removed from this Ansible role.  I'm not sure why.
     # - name: Fedora
     #   versions:
