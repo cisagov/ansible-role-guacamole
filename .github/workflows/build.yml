@@ -107,7 +107,9 @@ jobs:
       fail-fast: false
       matrix:
         scenario:
-          - debian
+          - debian_10
+          - debian_11
+          - debian_12
           - kali
           - ubuntu
     runs-on: ubuntu-latest
