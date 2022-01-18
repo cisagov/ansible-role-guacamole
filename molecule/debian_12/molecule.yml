@@ -1,0 +1,31 @@
+---
+# This molecule configuration file is suitable for testing Ansible
+# roles that _do_ require SystemD.  If your Ansible role _does not_
+# require SystemD then you should use molecule-no-systemd.yml instead.
+#
+# Note that the molecule configuration file that is symlinked to
+# molecule.yml is the one that will be used.
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+platforms:
+  - name: debian12-systemd
+    image: cisagov/docker-debian12-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+provisioner:
+  name: ansible
+scenario:
+  name: debian_12
+verifier:
+  name: testinfra
+  directory: ../tests/
