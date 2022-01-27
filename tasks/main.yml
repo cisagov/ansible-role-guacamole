@@ -2,9 +2,9 @@
 # tasks file for guacamole
 - name: Create the /var/guacamole directory
   ansible.builtin.file:
+    mode: 0755
     path: /var/guacamole
     state: directory
-    mode: 0755
 
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
