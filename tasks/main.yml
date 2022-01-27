@@ -16,6 +16,12 @@
       - "--strip-components=1"
     creates: /var/guacamole/docker-compose.yml
 
+- name: Create the dbinit directory with the desired permissions
+  ansible.builtin.file:
+    mode: 0777
+    path: /var/guacamole/dbinit
+    state: directory
+
 - name: Pull the Docker images used by the Guacamole Docker composition
   block:
     # Docker is only enabled in ansible-role-docker, but we need it to
