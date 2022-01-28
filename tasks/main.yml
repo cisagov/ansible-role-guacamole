@@ -44,9 +44,11 @@
         - guacamole/guacd:1.4.0
         - guacamole/guacamole:1.4.0
         # The version of the JDBC PostgreSQL driver included in the
-        # Guacamole Docker image (the one tagged "latest", as of
-        # November 5, 2021) is too old to work with PostgreSQL 14 or
-        # later.
+        # Guacamole Docker image (the one tagged "1.4.0") is too old
+        # to work with PostgreSQL 14 or later.
+        #
+        # See cisagov/guacamole-composition#37 for more information as
+        # to when this limitation can be remedied.
         - postgres:13
 
 - name: Update dummy username/password with real values
