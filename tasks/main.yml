@@ -40,7 +40,7 @@
         name: "{{ item }}"
         source: pull
       loop:
-        - cisagov/guacscanner:1.1.11
+        - cisagov/guacscanner:1.1.13-rc.1
         - guacamole/guacd:1.4.0
         - guacamole/guacamole:1.4.0
         # The version of the JDBC PostgreSQL driver included in the
