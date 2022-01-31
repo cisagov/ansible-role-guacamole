@@ -2,9 +2,9 @@
 # tasks file for guacamole
 - name: Create the /var/guacamole directory
   ansible.builtin.file:
+    mode: 0755
     path: /var/guacamole
     state: directory
-    mode: 0755
 
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
@@ -15,6 +15,12 @@
     extra_opts:
       - "--strip-components=1"
     creates: /var/guacamole/docker-compose.yml
+
+- name: Create the dbinit directory with the desired permissions
+  ansible.builtin.file:
+    mode: 0777
+    path: /var/guacamole/dbinit
+    state: directory
 
 - name: Pull the Docker images used by the Guacamole Docker composition
   block:
@@ -34,13 +40,15 @@
         name: "{{ item }}"
         source: pull
       loop:
-        - cisagov/guacscanner:1.1.6
-        - guacamole/guacd
-        - guacamole/guacamole
+        - cisagov/guacscanner:1.1.11
+        - guacamole/guacd:1.4.0
+        - guacamole/guacamole:1.4.0
         # The version of the JDBC PostgreSQL driver included in the
-        # Guacamole Docker image (the one tagged "latest", as of
-        # November 5, 2021) is too old to work with PostgreSQL 14 or
-        # later.
+        # Guacamole Docker image (the one tagged "1.4.0") is too old
+        # to work with PostgreSQL 14 or later.
+        #
+        # See cisagov/guacamole-composition#37 for more information as
+        # to when this limitation can be remedied.
         - postgres:13
 
 - name: Update dummy username/password with real values
