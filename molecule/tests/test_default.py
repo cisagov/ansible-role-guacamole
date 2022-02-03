@@ -71,7 +71,7 @@ def test_apache2_unit_modification(host):
 @pytest.mark.parametrize(
     "image",
     [
-        "cisagov/guacscanner:1.1.11",
+        "cisagov/guacscanner:1.1.13",
         "guacamole/guacd:1.4.0",
         "guacamole/guacamole:1.4.0",
         "postgres:13",
