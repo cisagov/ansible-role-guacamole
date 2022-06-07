@@ -6,11 +6,11 @@ Requires=docker.service
 [Service]
 Restart=always
 # Stop containers (if running) when unit is stopped
-ExecStartPre=/usr/bin/docker-compose --file /var/guacamole/docker-compose.yml down
+ExecStartPre=/usr/bin/docker compose --file /var/guacamole/docker-compose.yml down
 # Start containers when unit is started
-ExecStart=/usr/bin/docker-compose --file /var/guacamole/docker-compose.yml up
+ExecStart=/usr/bin/docker compose --file /var/guacamole/docker-compose.yml up
 # Stop container when unit is stopped
-ExecStop=/usr/bin/docker-compose --file /var/guacamole/docker-compose.yml down
+ExecStop=/usr/bin/docker compose --file /var/guacamole/docker-compose.yml down
 
 [Install]
 WantedBy=multi-user.target
