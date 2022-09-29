@@ -9,7 +9,7 @@
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
     src: >
-      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v0.1.4
+      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v0.1.5
     dest: /var/guacamole
     remote_src: yes
     extra_opts:
@@ -40,7 +40,7 @@
         name: "{{ item }}"
         source: pull
       loop:
-        - cisagov/guacscanner:1.1.13
+        - cisagov/guacscanner:1.1.15
         - guacamole/guacd:1.4.0
         - guacamole/guacamole:1.4.0
         # The version of the JDBC PostgreSQL driver included in the
