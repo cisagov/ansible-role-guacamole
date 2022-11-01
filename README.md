@@ -14,6 +14,7 @@ None.
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
+| guacamole_composition_version | The version of [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition) to use. | `0.1.6` | No |
 | postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
 | postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
 | private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
