@@ -9,7 +9,7 @@
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
     src: >
-      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v0.1.5
+      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{ guacamole_composition_version }}
     dest: /var/guacamole
     remote_src: yes
     extra_opts:
