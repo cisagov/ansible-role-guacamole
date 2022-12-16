@@ -107,7 +107,9 @@ jobs:
           - debian_11
           - debian_12
           - kali
-          - ubuntu
+          - ubuntu_18
+          - ubuntu_20
+          - ubuntu_22
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
