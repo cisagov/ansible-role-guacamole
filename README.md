@@ -1,8 +1,7 @@
 # ansible-role-guacamole #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-guacamole/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-guacamole/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-guacamole.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-guacamole/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-guacamole/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-guacamole/actions/workflows/codeql-analysis.yml)
 
 An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
 
@@ -37,17 +36,19 @@ Here's how to use it in a playbook:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: guacamole
+  tasks:
+    - name: Install Guacamole
+      ansible.builtin.include_role:
+        name: guacamole
       vars:
-          postgres_username: postgres_user
-          postgres_password: postgres_password
-          private_ssh_key: dummy_key
-          rdp_username: rdp_user
-          rdp_password: rdp_password
-          vnc_username: vnc_user
-          vnc_password: vnc_password
-          windows_sftp_base: /C:/Users/vnc_user
+        postgres_username: postgres_user
+        postgres_password: postgres_password
+        private_ssh_key: dummy_key
+        rdp_username: rdp_user
+        rdp_password: rdp_password
+        vnc_username: vnc_user
+        vnc_password: vnc_password
+        windows_sftp_base: /C:/Users/vnc_user
 ```
 
 ## Contributing ##
