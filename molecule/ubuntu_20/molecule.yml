@@ -17,8 +17,8 @@ lint: |
 platforms:
   - cgroupns_mode: host
     command: /lib/systemd/systemd
-    image: geerlingguy/docker-debian10-ansible:latest
-    name: debian10-systemd
+    image: geerlingguy/docker-ubuntu2004-ansible:latest
+    name: ubuntu-20-systemd
     platform: amd64
     pre_build_image: yes
     privileged: yes
@@ -27,7 +27,7 @@ platforms:
 provisioner:
   name: ansible
 scenario:
-  name: debian_10
+  name: ubuntu_20
 verifier:
   name: testinfra
   directory: ../tests/

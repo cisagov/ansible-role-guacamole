@@ -15,13 +15,15 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: debian11-systemd
+  - cgroupns_mode: host
+    command: /lib/systemd/systemd
     image: geerlingguy/docker-debian11-ansible:latest
+    name: debian11-systemd
+    platform: amd64
+    pre_build_image: yes
     privileged: yes
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /lib/systemd/systemd
-    pre_build_image: yes
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
 provisioner:
   name: ansible
 scenario:
