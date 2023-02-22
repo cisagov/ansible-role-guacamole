@@ -1,8 +1,13 @@
 ---
+dependencies:
+  - src: https://github.com/cisagov/ansible-role-docker
+    name: docker
+  - src: https://github.com/cisagov/ansible-role-httpd
+    name: httpd
 galaxy_info:
   author: Kyle Evers
-  description: Install Guacamole
   company: CISA Cyber Assessments
+  description: Install Guacamole
   galaxy_tags:
     - guacamole
   license: CC0
@@ -25,7 +30,6 @@ galaxy_info:
     # RedHat support was removed from this Ansible role.  I'm not sure why.
     # - name: Fedora
     #   versions:
-    #     - "35"
     #     - "36"
     #     - "37"
     - name: Ubuntu
@@ -34,9 +38,3 @@ galaxy_info:
         - focal
         - jammy
   role_name: guacamole
-
-dependencies:
-  - src: https://github.com/cisagov/ansible-role-docker
-    name: docker
-  - src: https://github.com/cisagov/ansible-role-httpd
-    name: httpd
