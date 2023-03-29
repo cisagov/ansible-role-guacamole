@@ -72,8 +72,8 @@ def test_apache2_unit_modification(host):
     "image",
     [
         "cisagov/guacscanner:1.1.15",
-        "guacamole/guacd:1.4.0",
-        "guacamole/guacamole:1.4.0",
+        "guacamole/guacd:1.5.0",
+        "guacamole/guacamole:1.5.0",
         "postgres:13",
     ],
 )

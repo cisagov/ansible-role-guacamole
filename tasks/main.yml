@@ -41,8 +41,8 @@
         source: pull
       loop:
         - cisagov/guacscanner:1.1.15
-        - guacamole/guacd:1.4.0
-        - guacamole/guacamole:1.4.0
+        - guacamole/guacd:1.5.0
+        - guacamole/guacamole:1.5.0
         # The version of the JDBC PostgreSQL driver included in the
         # Guacamole Docker image (the one tagged "1.4.0") is too old
         # to work with PostgreSQL 14 or later.
