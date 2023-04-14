@@ -74,7 +74,7 @@ def test_apache2_unit_modification(host):
         "cisagov/guacscanner:1.1.15",
         "guacamole/guacd:1.5.1",
         "guacamole/guacamole:1.5.1",
-        "postgres:13",
+        "postgres:15",
     ],
 )
 def test_docker_images_pulled(host, image):
