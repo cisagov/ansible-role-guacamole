@@ -41,8 +41,8 @@
         source: pull
       loop:
         - cisagov/guacscanner:1.1.15
-        - guacamole/guacd:1.5.1
         - guacamole/guacamole:1.5.1
+        - guacamole/guacd:1.5.1
         - postgres:15
 
 - name: Update dummy username/password with real values
