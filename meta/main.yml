@@ -22,6 +22,9 @@ galaxy_info:
     # Amazon Linux 2023 does not (yet?) offer docker-compose or the
     # Docker compose plugin:
     # https://github.com/amazonlinux/amazon-linux-2023/issues/186
+    #
+    # Also, RedHat support was removed from this Ansible role because
+    # some of its tasks are Debian-specific.
     # - name: Amazon Linux 2023
     #   versions:
     #     - any
@@ -30,7 +33,8 @@ galaxy_info:
         - buster
         - bullseye
         - bookworm
-    # RedHat support was removed from this Ansible role.  I'm not sure why.
+    # RedHat support was removed from this Ansible role because some
+    # of its tasks are Debian-specific.
     # - name: Fedora
     #   versions:
     #     - "36"
