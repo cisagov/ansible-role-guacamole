@@ -24,8 +24,6 @@ platforms:
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-provisioner:
-  name: ansible
 scenario:
   name: debian_12
 verifier:
