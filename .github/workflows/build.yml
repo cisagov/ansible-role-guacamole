@@ -110,7 +110,6 @@ jobs:
           - debian_11
           - debian_12
           - kali
-          - ubuntu_18
           - ubuntu_20
           - ubuntu_22
     runs-on: ubuntu-latest
