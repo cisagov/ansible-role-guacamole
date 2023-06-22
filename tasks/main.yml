@@ -1,5 +1,4 @@
 ---
-# tasks file for guacamole
 - name: Create the /var/guacamole directory
   ansible.builtin.file:
     mode: 0755
@@ -63,6 +62,8 @@
     label: "{{ item.filename }}"
 
 - name: Configure guacamole service
+  when:
+    - ansible_service_mgr == "systemd"
   block:
     - name: Set up guacamole as a systemd service
       ansible.builtin.copy:
@@ -78,8 +79,6 @@
       ansible.builtin.systemd:
         name: guacamole-composition.service
         enabled: true
-  when:
-    - ansible_service_mgr == "systemd"
 
 - name: Configure PAM for guacamole and guacamole-admin services
   ansible.builtin.copy:
