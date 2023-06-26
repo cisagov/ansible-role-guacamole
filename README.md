@@ -14,19 +14,19 @@ None.
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | guacamole_composition_version | The version of [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition) to use. | `0.1.6` | No |
-| postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
-| postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
-| private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
-| rdp_username | The username for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
-| rdp_password | The password for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
-| vnc_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
-| vnc_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
-| windows_sftp_base | The base path for the SFTP directories that Guacamole will use when connecting to a Windows instance via VNC. | n/a | Yes |
+| guacamole_postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
+| guacamole_postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
+| guacamole_private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
+| guacamole_rdp_username | The username for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
+| guacamole_rdp_password | The password for Guacamole to use when connecting to an instance via RDP. | n/a | Yes |
+| guacamole_vnc_username | The username for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| guacamole_vnc_password | The password for Guacamole to use when connecting to an instance via VNC. | n/a | Yes |
+| guacamole_windows_sftp_base | The base path for the SFTP directories that Guacamole will use when connecting to a Windows instance via VNC. | n/a | Yes |
 
 ## Dependencies ##
 
-- [cisagov/ansible-role-docker](https;//github.com/cisagov/ansible-role-docker)
-- [cisagov/ansible-role-httpd](https;//github.com/cisagov/ansible-role-httpd)
+- [cisagov/ansible-role-docker](https://github.com/cisagov/ansible-role-docker)
+- [cisagov/ansible-role-httpd](https://github.com/cisagov/ansible-role-httpd)
 
 ## Example Playbook ##
 
@@ -41,14 +41,14 @@ Here's how to use it in a playbook:
       ansible.builtin.include_role:
         name: guacamole
       vars:
-        postgres_username: postgres_user
-        postgres_password: postgres_password
-        private_ssh_key: dummy_key
-        rdp_username: rdp_user
-        rdp_password: rdp_password
-        vnc_username: vnc_user
-        vnc_password: vnc_password
-        windows_sftp_base: /C:/Users/vnc_user
+        guacamole_postgres_username: postgres_user
+        guacamole_postgres_password: postgres_password
+        guacamole_private_ssh_key: dummy_key
+        guacamole_rdp_username: rdp_user
+        guacamole_rdp_password: rdp_password
+        guacamole_vnc_username: vnc_user
+        guacamole_vnc_password: vnc_password
+        guacamole_windows_sftp_base: /C:/Users/vnc_user
 ```
 
 ## Contributing ##
@@ -71,4 +71,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-Kyle Evers - <kyle.evers@trio.dhs.gov>
+Kyle Evers - <kyle.evers@gwe.cisa.dhs.gov>

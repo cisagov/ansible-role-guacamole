@@ -1,5 +1,4 @@
 ---
-# tasks file for guacamole
 - name: Create the /var/guacamole directory
   ansible.builtin.file:
     mode: 0755
@@ -51,18 +50,20 @@
     dest: "/var/guacamole/src/secrets/{{ item.filename }}"
     mode: 0664
   loop:
-    - {filename: "postgres-username", contents: "{{ postgres_username }}"}
-    - {filename: "postgres-password", contents: "{{ postgres_password }}"}
-    - {filename: "private-ssh-key", contents: "{{ private_ssh_key }}"}
-    - {filename: "rdp-username", contents: "{{ rdp_username }}"}
-    - {filename: "rdp-password", contents: "{{ rdp_password }}"}
-    - {filename: "vnc-username", contents: "{{ vnc_username }}"}
-    - {filename: "vnc-password", contents: "{{ vnc_password }}"}
-    - {filename: "windows-sftp-base", contents: "{{ windows_sftp_base }}"}
+    - {filename: "postgres-username", contents: "{{ guacamole_postgres_username }}"}
+    - {filename: "postgres-password", contents: "{{ guacamole_postgres_password }}"}
+    - {filename: "private-ssh-key", contents: "{{ guacamole_private_ssh_key }}"}
+    - {filename: "rdp-username", contents: "{{ guacamole_rdp_username }}"}
+    - {filename: "rdp-password", contents: "{{ guacamole_rdp_password }}"}
+    - {filename: "vnc-username", contents: "{{ guacamole_vnc_username }}"}
+    - {filename: "vnc-password", contents: "{{ guacamole_vnc_password }}"}
+    - {filename: "windows-sftp-base", contents: "{{ guacamole_windows_sftp_base }}"}
   loop_control:
     label: "{{ item.filename }}"
 
 - name: Configure guacamole service
+  when:
+    - ansible_service_mgr == "systemd"
   block:
     - name: Set up guacamole as a systemd service
       ansible.builtin.copy:
@@ -78,8 +79,6 @@
       ansible.builtin.systemd:
         name: guacamole-composition.service
         enabled: true
-  when:
-    - ansible_service_mgr == "systemd"
 
 - name: Configure PAM for guacamole and guacamole-admin services
   ansible.builtin.copy:
