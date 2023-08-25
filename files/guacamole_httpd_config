@@ -1,5 +1,5 @@
 <VirtualHost *:443>
-    ServerAdmin ncats-dev@beta.dhs.gov
+    ServerAdmin vm-dev@gwe.cisa.dhs.gov
 
     # Available loglevels: trace8, ..., trace1, debug, info, notice,
     # warn, error, crit, alert, emerg.
