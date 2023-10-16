@@ -1,9 +1,14 @@
 ---
+# Note that dependencies listed here are automatically installed
+# before this role.  Role variables for any roles listed here can be
+# assigned static variables.
+#
+# See also cisagov/skeleton-ansible-role#153.
 dependencies:
-  - src: https://github.com/cisagov/ansible-role-docker
-    name: docker
-  - src: https://github.com/cisagov/ansible-role-httpd
-    name: httpd
+  - name: docker
+    src: https://github.com/cisagov/ansible-role-docker
+  - name: httpd
+    src: https://github.com/cisagov/ansible-role-httpd
 galaxy_info:
   author: Kyle Evers
   company: CISA Cyber Assessments
@@ -47,3 +52,4 @@ galaxy_info:
         - focal
         - jammy
   role_name: guacamole
+  standalone: true
