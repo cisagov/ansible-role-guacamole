@@ -1,7 +1,7 @@
 ---
-- src: https://github.com/cisagov/ansible-role-docker
-  name: docker
-- src: https://github.com/cisagov/ansible-role-httpd
-  name: httpd
-- src: https://github.com/cisagov/ansible-role-upgrade
-  name: upgrade
+- name: docker
+  src: https://github.com/cisagov/ansible-role-docker
+- name: httpd
+  src: https://github.com/cisagov/ansible-role-httpd
+- name: upgrade
+  src: https://github.com/cisagov/ansible-role-upgrade
