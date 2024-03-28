@@ -38,12 +38,20 @@ galaxy_info:
         - buster
         - bullseye
         - bookworm
+<<<<<<< HEAD
     # RedHat support was removed from this Ansible role because some
     # of its tasks are Debian-specific.
     # - name: Fedora
     #   versions:
     #     - "37"
     #     - "38"
+=======
+        - trixie
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+>>>>>>> c121f6c2d751ea234695e5ff5188c9a834537efd
     - name: Kali
       versions:
         - "2023"
