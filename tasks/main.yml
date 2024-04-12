@@ -10,7 +10,7 @@
     src: >
       https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{ guacamole_composition_version }}
     dest: /var/guacamole
-    remote_src: yes
+    remote_src: true
     extra_opts:
       - "--strip-components=1"
     creates: /var/guacamole/docker-compose.yml
@@ -143,7 +143,7 @@
     - name: Ensure that httpd only starts after cloud-final has completed
       ansible.builtin.lineinfile:
         path: /lib/systemd/system/apache2.service
-        backrefs: yes
+        backrefs: true
         # The exclamation mark forces us to quote the string because
         # it is a special character in YAML.
         #
