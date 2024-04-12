@@ -38,7 +38,10 @@ galaxy_info:
         - buster
         - bullseye
         - bookworm
-        - trixie
+        # Docker does not yet officially support Debian Trixie.  See
+        # https://docs.docker.com/engine/install/debian/ for more
+        # details.
+        # - trixie
     # RedHat support was removed from this Ansible role because some
     # of its tasks are Debian-specific.
     - name: Fedora
