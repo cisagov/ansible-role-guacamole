@@ -44,10 +44,10 @@ galaxy_info:
         # - trixie
     # RedHat support was removed from this Ansible role because some
     # of its tasks are Debian-specific.
-    - name: Fedora
-      versions:
-        - "38"
-        - "39"
+    # - name: Fedora
+    #   versions:
+    #     - "38"
+    #     - "39"
     - name: Kali
       versions:
         - "2023"
