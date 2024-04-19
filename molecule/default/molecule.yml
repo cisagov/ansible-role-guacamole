@@ -4,12 +4,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  # Amazon Linux 2023 does not (yet?) offer docker-compose or the
-  # Docker compose plugin:
-  # https://github.com/amazonlinux/amazon-linux-2023/issues/186
-  #
-  # Also, RedHat support was removed from this Ansible role because
-  # some of its tasks are Debian-specific.
+  # RedHat support was removed from this Ansible role because some of
+  # its tasks are Debian-specific.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd
   #   image: docker.io/geerlingguy/docker-amazonlinux2023-ansible:latest
