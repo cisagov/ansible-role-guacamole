@@ -181,13 +181,20 @@ jobs:
           - amd64
           - arm64
         platform:
-          - amazonlinux2023-systemd
+          # RedHat support was removed from this Ansible role because
+          # some of its tasks are Debian-specific.
+          # - amazonlinux2023-systemd
           - debian10-systemd
           - debian11-systemd
           - debian12-systemd
-          - debian13-systemd
-          - fedora39-systemd
-          - fedora40-systemd
+          # Docker does not yet officially support Debian Trixie.  See
+          # https://docs.docker.com/engine/install/debian/ for more
+          # details.
+          # - debian13-systemd
+          # RedHat support was removed from this Ansible role because
+          # some of its tasks are Debian-specific.
+          # - fedora39-systemd
+          # - fedora40-systemd
           - kali-systemd
           - ubuntu-20-systemd
           - ubuntu-22-systemd
