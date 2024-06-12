@@ -6,8 +6,8 @@
 An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
 
 > [!NOTE]
-> We cannot currently test *any* ARM64 platforms under `qemu` because
-> [`qemu` cannot currently support
+> We cannot currently test *any* ARM64 platforms under QEMU because
+> [QEMU cannot currently support
 > `iptables`](https://github.com/multiarch/qemu-user-static/issues/191).
 > This is because this role actually starts the Docker service before
 > pre-downloading some Docker images, and starting the Docker service
