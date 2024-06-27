@@ -168,21 +168,47 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
   test:
+    name: >-
+      test (${{ matrix.scenario }}) -
+      ${{ matrix.platform }}-${{ matrix.architecture }}
     needs:
       - diagnostics
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        scenario:
-          - default
+        architecture:
+          - amd64
+          # We cannot currently test _any_ ARM64 platforms under qemu
+          # because qemu cannot currently support iptables:
+          # https://github.com/multiarch/qemu-user-static/issues/191
+          #
+          # This is because this role actually starts the Docker
+          # service before pre-downloading some Docker images, and
+          # starting the Docker service requires some interaction with
+          # iptables.
+          # - arm64
         platform:
+          # RedHat support was removed from this Ansible role because
+          # some of its tasks are Debian-specific.
+          # - amazonlinux2023-systemd
           - debian10-systemd
           - debian11-systemd
           - debian12-systemd
+          # Docker does not yet officially support Debian Trixie.  See
+          # https://docs.docker.com/engine/install/debian/ for more
+          # details.
+          # - debian13-systemd
+          # RedHat support was removed from this Ansible role because
+          # some of its tasks are Debian-specific.
+          # - fedora39-systemd
+          # - fedora40-systemd
           - kali-systemd
           - ubuntu-20-systemd
           - ubuntu-22-systemd
+          - ubuntu-24-systemd
+        scenario:
+          - default
     steps:
       - id: harden-runner
         name: Harden the runner
@@ -211,9 +237,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade --requirement requirements-test.txt
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Run molecule tests
         run: >-
-          molecule test --platform-name ${{ matrix.platform }}
+          molecule test
+          --platform-name ${{ matrix.platform }}-${{ matrix.architecture }}
           --scenario-name ${{ matrix.scenario }}
       - name: Setup tmate debug session
         uses: mxschmitt/action-tmate@v3
