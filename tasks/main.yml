@@ -12,7 +12,7 @@
     dest: /var/guacamole
     remote_src: true
     extra_opts:
-      - "--strip-components=1"
+      - --strip-components=1
     creates: /var/guacamole/docker-compose.yml
 
 - name: Create the dbinit directory with the desired permissions
@@ -47,24 +47,24 @@
 - name: Update dummy username/password with real values
   ansible.builtin.copy:
     content: "{{ item.contents }}"
-    dest: "/var/guacamole/src/secrets/{{ item.filename }}"
+    dest: /var/guacamole/src/secrets/{{ item.filename }}
     mode: u=rw,g=rw,o=r
   loop:
-    - filename: "postgres-username"
+    - filename: postgres-username
       contents: "{{ guacamole_postgres_username }}"
-    - filename: "postgres-password"
+    - filename: postgres-password
       contents: "{{ guacamole_postgres_password }}"
-    - filename: "private-ssh-key"
+    - filename: private-ssh-key
       contents: "{{ guacamole_private_ssh_key }}"
-    - filename: "rdp-username"
+    - filename: rdp-username
       contents: "{{ guacamole_rdp_username }}"
-    - filename: "rdp-password"
+    - filename: rdp-password
       contents: "{{ guacamole_rdp_password }}"
-    - filename: "vnc-username"
+    - filename: vnc-username
       contents: "{{ guacamole_vnc_username }}"
-    - filename: "vnc-password"
+    - filename: vnc-password
       contents: "{{ guacamole_vnc_password }}"
-    - filename: "windows-sftp-base"
+    - filename: windows-sftp-base
       contents: "{{ guacamole_windows_sftp_base }}"
   loop_control:
     label: "{{ item.filename }}"
