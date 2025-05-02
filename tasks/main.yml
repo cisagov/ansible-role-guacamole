@@ -153,7 +153,8 @@
         path: /lib/systemd/system/apache2.service
         backrefs: true
         # The exclamation mark forces us to quote the string because
-        # it is a special character in YAML.
+        # it is a special character in YAML.  This is the reason for
+        # the yamllint disable directive below.
         #
         # The (?<!...) jazz is a negative look-behind assertion.  See
         # here, for example:
@@ -161,6 +162,8 @@
         #
         # Note also that cloud-final.service must always appear at the
         # end of the After=... line for this to work.
+        #
+        # yamllint disable-line rule:quoted-strings
         regexp: '^After=(.*)(?<!cloud\-final\.service)$'
         line: After=\1 cloud-final.service
 
