@@ -8,7 +8,8 @@
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
     src: >
-      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{ guacamole_composition_version }}
+      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{
+      guacamole_composition_version }}
     dest: /var/guacamole
     remote_src: true
     extra_opts:
@@ -118,7 +119,9 @@
     # to check the config then it blindly tries to install all the
     # modules again when it installs cisagov/ansible-role-httpd a
     # second time and fails.
-    - name: Create dummy non-empty SSL cert files so apache2ctl thinks the config is valid
+    - name: >-
+        Create dummy non-empty SSL cert files so apache2ctl thinks the config
+        is valid
       block:
         - name: Ensure cert directory exists
           ansible.builtin.file:
