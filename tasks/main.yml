@@ -50,14 +50,22 @@
     dest: "/var/guacamole/src/secrets/{{ item.filename }}"
     mode: u=rw,g=rw,o=r
   loop:
-    - {filename: "postgres-username", contents: "{{ guacamole_postgres_username }}"}
-    - {filename: "postgres-password", contents: "{{ guacamole_postgres_password }}"}
-    - {filename: "private-ssh-key", contents: "{{ guacamole_private_ssh_key }}"}
-    - {filename: "rdp-username", contents: "{{ guacamole_rdp_username }}"}
-    - {filename: "rdp-password", contents: "{{ guacamole_rdp_password }}"}
-    - {filename: "vnc-username", contents: "{{ guacamole_vnc_username }}"}
-    - {filename: "vnc-password", contents: "{{ guacamole_vnc_password }}"}
-    - {filename: "windows-sftp-base", contents: "{{ guacamole_windows_sftp_base }}"}
+    - filename: "postgres-username"
+      contents: "{{ guacamole_postgres_username }}"
+    - filename: "postgres-password"
+      contents: "{{ guacamole_postgres_password }}"
+    - filename: "private-ssh-key"
+      contents: "{{ guacamole_private_ssh_key }}"
+    - filename: "rdp-username"
+      contents: "{{ guacamole_rdp_username }}"
+    - filename: "rdp-password"
+      contents: "{{ guacamole_rdp_password }}"
+    - filename: "vnc-username"
+      contents: "{{ guacamole_vnc_username }}"
+    - filename: "vnc-password"
+      contents: "{{ guacamole_vnc_password }}"
+    - filename: "windows-sftp-base"
+      contents: "{{ guacamole_windows_sftp_base }}"
   loop_control:
     label: "{{ item.filename }}"
 
