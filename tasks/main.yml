@@ -1,7 +1,7 @@
 ---
 - name: Create the /var/guacamole directory
   ansible.builtin.file:
-    mode: 0755
+    mode: u=rwx,g=rx,o=rx
     path: /var/guacamole
     state: directory
 
@@ -17,7 +17,7 @@
 
 - name: Create the dbinit directory with the desired permissions
   ansible.builtin.file:
-    mode: 0777
+    mode: u=rwx,g=rwx,o=rwx
     path: /var/guacamole/dbinit
     state: directory
 
@@ -48,7 +48,7 @@
   ansible.builtin.copy:
     content: "{{ item.contents }}"
     dest: "/var/guacamole/src/secrets/{{ item.filename }}"
-    mode: 0664
+    mode: u=rw,g=rw,o=r
   loop:
     - {filename: "postgres-username", contents: "{{ guacamole_postgres_username }}"}
     - {filename: "postgres-password", contents: "{{ guacamole_postgres_password }}"}
@@ -69,7 +69,7 @@
       ansible.builtin.copy:
         src: guacamole-composition.service
         dest: /lib/systemd/system/
-        mode: 0644
+        mode: u=rw,g=r,o=r
 
     - name: Systemd daemon-reload
       ansible.builtin.systemd:
@@ -86,7 +86,7 @@
         auth    required   pam_sss.so
         account required   pam_sss.so
     dest: /etc/pam.d/{{ item }}
-    mode: 0644
+    mode: u=rw,g=r,o=r
   loop:
     - guacamole
     - guacamole-admin
@@ -116,12 +116,12 @@
           ansible.builtin.file:
             path: /var/guacamole/httpd/ssl
             state: directory
-            mode: 0755
+            mode: u=rwx,g=rx,o=rx
         - name: Create dummy cert files
           ansible.builtin.copy:
             content: Hello
             dest: /var/guacamole/httpd/ssl/{{ item }}
-            mode: 0644
+            mode: u=rw,g=r,o=r
           loop:
             - self.cert
             - self-ssl.key
@@ -130,7 +130,7 @@
       ansible.builtin.copy:
         src: guacamole_httpd_config
         dest: /etc/apache2/sites-available/guacamole.conf
-        mode: 0644
+        mode: u=rw,g=r,o=r
 
     - name: Enable guacamole httpd configuration
       ansible.builtin.file:
@@ -160,4 +160,4 @@
   ansible.builtin.copy:
     src: 02_setup_guacamole_services.sh
     dest: /usr/local/sbin
-    mode: 0500
+    mode: u=rx,g=,o=
