@@ -71,8 +71,6 @@
     label: "{{ item.filename }}"
 
 - name: Configure guacamole service
-  when:
-    - ansible_service_mgr == "systemd"
   block:
     - name: Set up guacamole as a systemd service
       ansible.builtin.copy:
