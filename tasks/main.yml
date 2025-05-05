@@ -147,26 +147,34 @@
         dest: /etc/apache2/sites-enabled/guacamole.conf
         state: link
 
-    # The real SSL certificates for the web server aren't available
-    # until cloud-final has completed.
-    - name: Ensure that httpd only starts after cloud-final has completed
-      ansible.builtin.lineinfile:
-        path: /lib/systemd/system/apache2.service
-        backrefs: true
-        # The exclamation mark forces us to quote the string because
-        # it is a special character in YAML.  This is the reason for
-        # the yamllint disable directive below.
-        #
-        # The (?<!...) jazz is a negative look-behind assertion.  See
-        # here, for example:
-        # https://docs.python.org/3/library/re.html
-        #
-        # Note also that cloud-final.service must always appear at the
-        # end of the After=... line for this to work.
-        #
-        # yamllint disable-line rule:quoted-strings
-        regexp: '^After=(.*)(?<!cloud\-final\.service)$'
-        line: After=\1 cloud-final.service
+    - name: >-
+        Ensure that the directory where the apache2 service drop-in
+        will live actually exists
+      ansible.builtin.file:
+        group: root
+        mode: u=rwx,g=rx,o=rx
+        owner: root
+        path: /etc/systemd/system/apache2.service.d
+        state: directory
+
+    # This drop-in contains our local overrides for the apache2
+    # systemd service.
+    - name: Create the drop-in unit file
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/apache2.service.d/apache2.conf
+        group: root
+        mode: u=rw,g=r,o=r
+        owner: root
+        src: apache2.service
+        # It would be great to use systemd-analyze verify here, but
+        # that won't work.  See, for instance, this GitHub issue
+        # comment:
+        # https://github.com/ansible/ansible/issues/19243#issuecomment-266508074
+        # validate: /usr/bin/systemd-analyze verify %s
+
+    - name: Systemd daemon-reload
+      ansible.builtin.systemd:
+        daemon_reload: true
 
 - name: Copy setup script
   ansible.builtin.copy:
