@@ -2,6 +2,7 @@
 
 # Standard Python Libraries
 import os
+import re
 
 # Third-Party Libraries
 import pytest
@@ -61,11 +62,42 @@ def test_services(host):
     assert host.service("guacamole-composition").is_enabled
 
 
-def test_apache2_unit_modification(host):
-    """Test that the apache2 httpd unit file was modified as expected."""
-    assert host.file("/lib/systemd/system/apache2.service").contains(
-        r"After=.* cloud-final.service"
-    )
+def test_dropin_dir(host):
+    """Test that the httpd drop-in directory was created as expected."""
+    f = host.file("/etc/systemd/system/apache2.service.d")
+
+    assert f.exists
+    assert f.is_directory
+    assert f.user == "root"
+    assert f.group == "root"
+    assert f.mode == 0o755
+
+
+def test_dropin_file(host):
+    """Test that the httpd drop-in file was created as expected."""
+    f = host.file("/etc/systemd/system/apache2.service.d/apache2.conf")
+
+    assert f.exists
+    assert f.is_file
+    assert f.user == "root"
+    assert f.group == "root"
+    assert f.mode == 0o644
+
+
+@pytest.mark.parametrize(
+    "prop,regex",
+    [
+        ("After", r"^After=.*cloud-final\.service"),
+    ],
+)
+def test_unit_properties(host, prop, regex):
+    """Test that unit properties were modified via drop-ins as expected."""
+    cmd = f"systemctl show --no-pager --property={prop} apache2.service"
+    cmd_result = host.run(cmd)
+    assert cmd_result.rc == 0, "{cmd} command failed"
+    assert (
+        re.search(regex, cmd_result.stdout) is not None
+    ), f"Regex {regex} does not match any line in {cmd} output."
 
 
 @pytest.mark.parametrize(
