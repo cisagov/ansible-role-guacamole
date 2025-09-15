@@ -31,19 +31,10 @@
         name: docker
         state: started
 
-    # Ideally we'd use the community.general.docker_compose Ansible
-    # module for pulling the images, but that module does not allow
-    # for pulling images without actually starting up the composition.
     - name: >
         Pull Docker images used by the Guacamole Docker composition
-      community.general.docker_image:
-        name: "{{ item }}"
-        source: pull
-      loop:
-        - cisagov/guacscanner:1.1.15
-        - guacamole/guacamole:1.5.1
-        - guacamole/guacd:1.5.1
-        - postgres:15
+      community.docker.docker_compose_v2_pull:
+        project_src: /var/guacamole
 
 - name: Update dummy username/password with real values
   ansible.builtin.copy:
