@@ -1,6 +1,7 @@
 # ansible-role-guacamole #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-guacamole/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-guacamole/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-guacamole)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-guacamole/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-guacamole/actions/workflows/codeql-analysis.yml)
 
 An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
