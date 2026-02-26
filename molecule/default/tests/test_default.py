@@ -94,7 +94,7 @@ def test_unit_properties(host, prop, regex):
     """Test that unit properties were modified via drop-ins as expected."""
     cmd = f"systemctl show --no-pager --property={prop} apache2.service"
     cmd_result = host.run(cmd)
-    assert cmd_result.rc == 0, "{cmd} command failed"
+    assert cmd_result.rc == 0, f"{cmd} command failed"
     assert (
         re.search(regex, cmd_result.stdout) is not None
     ), f"Regex {regex} does not match any line in {cmd} output."
