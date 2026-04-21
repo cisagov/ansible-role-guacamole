@@ -14,7 +14,7 @@
     remote_src: true
     extra_opts:
       - --strip-components=1
-    creates: /var/guacamole/docker-compose.yml
+    creates: /var/guacamole/compose.yml
 
 - name: Create the dbinit directory with the desired permissions
   ansible.builtin.file:
