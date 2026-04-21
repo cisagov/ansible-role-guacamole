@@ -103,10 +103,10 @@ def test_unit_properties(host, prop, regex):
 @pytest.mark.parametrize(
     "image",
     [
-        "cisagov/guacscanner:1.1.15",
-        "guacamole/guacd:1.5.1",
-        "guacamole/guacamole:1.5.1",
-        "postgres:15",
+        "cisagov/guacscanner:1.2.1",
+        "guacamole/guacd:1.6.0",
+        "guacamole/guacamole:1.6.0",
+        "postgres:18",
     ],
 )
 def test_docker_images_pulled(host, image):
