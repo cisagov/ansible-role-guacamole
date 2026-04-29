@@ -14,7 +14,19 @@
     remote_src: true
     extra_opts:
       - --strip-components=1
-    creates: /var/guacamole/docker-compose.yml
+    # Using a fixed creates: /var/guacamole/compose.yml here makes the
+    # ansible.builtin.unarchive task skip on subsequent runs even if
+    # guacamole_composition_version changes, in which case the role
+    # wouldn't actually upgrade/downgrade the installed composition
+    # when the desired version is updated.  Instead we key idempotence
+    # to the version using a marker file whose file name includes the
+    # value of guacamole_composition_version.
+    #
+    # See also the handler that this task calls.
+    creates: >-
+      /var/guacamole/.guacamole-composition-{{
+      guacamole_composition_version }}.installed
+  notify: create installation marker
 
 - name: Create the dbinit directory with the desired permissions
   ansible.builtin.file:

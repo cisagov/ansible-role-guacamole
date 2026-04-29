@@ -214,15 +214,7 @@ jobs:
       matrix:
         architecture:
           - amd64
-          # We cannot currently test _any_ ARM64 platforms under qemu
-          # because qemu cannot currently support iptables:
-          # https://github.com/multiarch/qemu-user-static/issues/191
-          #
-          # This is because this role actually starts the Docker
-          # service before pre-downloading some Docker images, and
-          # starting the Docker service requires some interaction with
-          # iptables.
-          # - arm64
+          - arm64
         platform:
           # RedHat support was removed from this Ansible role because
           # some of its tasks are Debian-specific.

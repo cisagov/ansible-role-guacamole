@@ -6,14 +6,6 @@
 
 An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
 
-> [!NOTE]
-> We cannot currently test *any* ARM64 platforms under QEMU because
-> [QEMU cannot currently support
-> `iptables`](https://github.com/multiarch/qemu-user-static/issues/191).
-> This is because this role actually starts the Docker service before
-> pre-downloading some Docker images, and starting the Docker service
-> requires some interaction with `iptables`.
-
 ## Requirements ##
 
 None.
@@ -22,7 +14,7 @@ None.
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| guacamole_composition_version | The version of [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition) to use. | `0.1.6` | No |
+| guacamole_composition_version | The version of [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition) to use. | `1.0.1` | No |
 | guacamole_postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
 | guacamole_postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
 | guacamole_private_ssh_key | The private ssh key to use for SFTP file transfer in Guacamole. | n/a | Yes |
