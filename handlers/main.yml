@@ -1,0 +1,9 @@
+---
+- name: Create guacamole-composition installation marker
+  ansible.builtin.file:
+    mode: u=rw,g=r,o=r
+    path: >-
+      /var/guacamole/.guacamole-composition-{{
+      guacamole_composition_version }}.installed
+    state: touch
+  listen: create installation marker
