@@ -110,7 +110,7 @@ def test_unit_properties(host, prop, regex):
     ],
 )
 def test_docker_images_pulled(host, image):
-    """Test that the Docker images used by the Guacamole Docker composition are present."""
+    """Test that Docker images used by Guacamole Docker composition are present."""
     assert image in host.check_output(
         # Unfortunately Jinja and Go templates use the same
         # double-bracket syntax, so we have to force Jinja to ignore
