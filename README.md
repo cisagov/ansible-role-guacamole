@@ -13,7 +13,7 @@ None.
 ## Role Variables ##
 
 | Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
+| -------- | ----------- | ------- | -------- |
 | guacamole_composition_version | The version of [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition) to use. | `1.0.1` | No |
 | guacamole_postgres_username | The username to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
 | guacamole_postgres_password | The password to use when connecting to the PostgreSQL database that backends Guacamole. | n/a | Yes |
