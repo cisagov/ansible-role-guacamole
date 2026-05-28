@@ -103,7 +103,7 @@ def test_unit_properties(host, prop, regex):
 @pytest.mark.parametrize(
     "image",
     [
-        "cisagov/guacscanner:1.2.2-rc.1",
+        "cisagov/guacscanner:1.2.2",
         "guacamole/guacd:1.6.0",
         "guacamole/guacamole:1.6.0",
         "postgres:18",
