@@ -12,13 +12,19 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize("d", ["/var/guacamole", "/var/guacamole/httpd/ssl"])
-def test_directories(host, d):
+@pytest.mark.parametrize(
+    "d, perms",
+    [
+        ("/var/guacamole", 0o755),
+        ("/var/guacamole/httpd/ssl", 0o755),
+    ],
+)
+def test_directories(host, d, perms):
     """Test that the expected directories were created and are not empty."""
     assert host.file(d).exists, f"Directory {d} does not exist"
     assert host.file(d).is_directory, f"{d} is not a directory"
     assert host.file(d).listdir(), f"Directory {d} is empty"
-    assert host.file(d).mode == 0o755, f"Directory {d} does not have mode 0o755"
+    assert host.file(d).mode == perms, f"Directory {d} does not have mode {perms:#o}"
 
 
 @pytest.mark.parametrize(
@@ -37,7 +43,7 @@ def test_files(host, f, perms):
     assert host.file(f).exists, f"File {f} does not exist"
     assert host.file(f).is_file, f"{f} is not a file"
     assert host.file(f).content, f"File {f} is empty"
-    assert host.file(f).mode == perms, f"File {f} does not have mode {perms}"
+    assert host.file(f).mode == perms, f"File {f} does not have mode {perms:#o}"
 
 
 @pytest.mark.parametrize(
