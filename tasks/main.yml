@@ -7,13 +7,6 @@
 
 - name: Download and untar the guacamole-composition tarball
   ansible.builtin.unarchive:
-    src: >
-      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{
-      guacamole_composition_version }}
-    dest: /var/guacamole
-    remote_src: true
-    extra_opts:
-      - --strip-components=1
     # Using a fixed creates: /var/guacamole/compose.yml here makes the
     # ansible.builtin.unarchive task skip on subsequent runs even if
     # guacamole_composition_version changes, in which case the role
@@ -26,6 +19,13 @@
     creates: >-
       /var/guacamole/.guacamole-composition-{{
       guacamole_composition_version }}.installed
+    dest: /var/guacamole
+    extra_opts:
+      - --strip-components=1
+    remote_src: true
+    src: >
+      https://api.github.com/repos/cisagov/guacamole-composition/tarball/v{{
+      guacamole_composition_version }}
   notify: create installation marker
 
 - name: Create the dbinit directory with the desired permissions
@@ -77,9 +77,9 @@
   block:
     - name: Set up guacamole as a systemd service
       ansible.builtin.copy:
-        src: guacamole-composition.service
         dest: /lib/systemd/system/
         mode: u=rw,g=r,o=r
+        src: guacamole-composition.service
 
     - name: Systemd daemon-reload
       ansible.builtin.systemd:
@@ -87,8 +87,8 @@
 
     - name: Enable guacamole systemd service
       ansible.builtin.systemd:
-        name: guacamole-composition.service
         enabled: true
+        name: guacamole-composition.service
 
 - name: Configure PAM for guacamole and guacamole-admin services
   ansible.builtin.copy:
@@ -108,8 +108,8 @@
     - name: Disable listening on port 80
       ansible.builtin.lineinfile:
         path: /etc/apache2/ports.conf
-        state: absent
         regexp: Listen 80
+        state: absent
 
     - name: Disable default httpd configuration
       ansible.builtin.file:
@@ -126,9 +126,9 @@
       block:
         - name: Ensure cert directory exists
           ansible.builtin.file:
+            mode: u=rwx,g=rx,o=rx
             path: /var/guacamole/httpd/ssl
             state: directory
-            mode: u=rwx,g=rx,o=rx
         - name: Create dummy cert files
           ansible.builtin.copy:
             content: Hello
@@ -140,18 +140,18 @@
 
     - name: Copy guacamole httpd configuration
       ansible.builtin.copy:
-        src: guacamole_httpd_config
         dest: /etc/apache2/sites-available/guacamole.conf
         mode: u=rw,g=r,o=r
+        src: guacamole_httpd_config
 
     - name: Enable guacamole httpd configuration
       ansible.builtin.file:
-        src: /etc/apache2/sites-available/guacamole.conf
         dest: /etc/apache2/sites-enabled/guacamole.conf
+        src: /etc/apache2/sites-available/guacamole.conf
         state: link
 
 - name: Copy setup script
   ansible.builtin.copy:
-    src: 02_setup_guacamole_services.sh
     dest: /usr/local/sbin
     mode: u=rx,g=,o=
+    src: 02_setup_guacamole_services.sh
