@@ -6,6 +6,16 @@
 
 An Ansible role for installing [cisagov/guacamole-composition](https://github.com/cisagov/guacamole-composition).
 
+> [!NOTE]
+> Note that we disable apache2.service in this Ansible role.
+> apache2.service cannot start successfully until cloud-final.service
+> has run because it requires that certificates be downloaded via a
+> cloud-init user-data script, but adding cloud-final.service as a
+> dependency of apache2.service results in a systemd dependency loop.
+> The solution is to start and enable apache2.service via a user-data
+> script run by cloud-init *after* cloud-init has downloaded the
+> certificates.
+
 ## Requirements ##
 
 None.

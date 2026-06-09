@@ -9,6 +9,8 @@ dependencies:
     src: https://github.com/cisagov/ansible-role-docker
   - name: httpd
     src: https://github.com/cisagov/ansible-role-httpd
+    vars:
+      httpd_enable: false
 galaxy_info:
   author: Kyle Evers
   company: CISA Cyber Assessments
