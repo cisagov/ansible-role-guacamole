@@ -72,7 +72,7 @@ def test_services(host):
 @pytest.mark.parametrize(
     "image",
     [
-        "cisagov/guacscanner:1.2.2",
+        "cisagov/guacscanner:1.3.0",
         "guacamole/guacd:1.6.0",
         "guacamole/guacamole:1.6.0",
         "postgres:18",
