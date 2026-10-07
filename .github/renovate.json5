@@ -15,7 +15,7 @@
       managerFilePatterns: ["/^defaults/main\\.yml$/", "/^README\\.md$/"],
       matchStrings: [
         "guacamole_composition_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
-        "guacamole\\\\?_composition\\\\?_version[^`]*`(?<currentValue>[^`]+)`", // README table cell
+        "guacamole\\\\?_composition\\\\?_version[^`\\n]*`(?<currentValue>[^`\\n]+)`", // README table cell
       ],
       versioningTemplate: "semver-coerced",
     },
