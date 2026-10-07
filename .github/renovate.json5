@@ -13,6 +13,7 @@
       // URL.  See cisagov/guacamole-composition releases.
       extractVersionTemplate: "^v?(?<version>.+)$",
       managerFilePatterns: ["/^defaults/main\\.yml$/", "/^README\\.md$/"],
+      // These patterns fail open if either file is reformatted.  See #99.
       matchStrings: [
         "guacamole_composition_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
         "guacamole\\\\?_composition\\\\?_version[^`\\n]*`(?<currentValue>[^`\\n]+)`", // README table cell
