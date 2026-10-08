@@ -1,0 +1,28 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Dependabot keeps handling github-actions + pip + terraform; Renovate
+  // only manages the guacamole-composition pin, so restrict it to the
+  // custom manager to avoid overlap.
+  customManagers: [
+    {
+      customType: "regex",
+      datasourceTemplate: "github-releases",
+      depNameTemplate: "cisagov/guacamole-composition",
+      // Upstream release tags are `v`-prefixed, but this role's variable
+      // is not; tasks/main.yml adds the `v` when building the tarball
+      // URL.  See cisagov/guacamole-composition releases.
+      extractVersionTemplate: "^v?(?<version>.+)$",
+      managerFilePatterns: ["/^defaults/main\\.yml$/", "/^README\\.md$/"],
+      // These patterns fail open if either file is reformatted.  See #99.
+      matchStrings: [
+        "guacamole_composition_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
+        "guacamole\\\\?_composition\\\\?_version[^`\\n]*`(?<currentValue>[^`\\n]+)`", // README table cell
+      ],
+      versioningTemplate: "semver-coerced",
+    },
+  ],
+  dependencyDashboard: true,
+  enabledManagers: ["custom.regex"],
+  extends: ["config:recommended"],
+  labels: ["dependencies"],
+}
